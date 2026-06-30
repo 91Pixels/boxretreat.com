@@ -1,0 +1,98 @@
+.wrap {
+  min-height: 100vh;
+  background: var(--br-darkest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.card {
+  max-width: 480px;
+  width: 100%;
+  border: 1px solid var(--br-mid);
+  background: var(--br-dark);
+  padding: 48px 40px;
+  text-align: center;
+}
+
+.icon {
+  font-size: 48px;
+  color: var(--br-lightest);
+  margin-bottom: 24px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--br-white);
+  margin-bottom: 8px;
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--br-light);
+  margin-bottom: 32px;
+}
+
+.codeLabel {
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  color: var(--br-mid);
+  margin-bottom: 12px;
+}
+
+.code {
+  font-size: 56px;
+  font-weight: 700;
+  color: var(--br-white);
+  letter-spacing: 0.2em;
+  margin-bottom: 8px;
+}
+
+.codeNote {
+  font-size: 12px;
+  color: var(--br-mid);
+  margin-bottom: 32px;
+}
+
+.details {
+  border-top: 1px solid var(--br-mid);
+  padding-top: 24px;
+  text-align: left;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--br-light);
+  margin-bottom: 10px;
+}
+
+.detailVal {
+  color: var(--br-lightest);
+  font-weight: 600;
+}
+
+.returnLink {
+  display: block;
+  margin-top: 32px;
+  font-size: 13px;
+  color: var(--br-mid);
+  text-align: center;
+}
+
+.returnLink a {
+  color: var(--br-lightest);
+  text-decoration: underline;
+}
+
+.errorWrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--br-light);
+  font-size: 16px;
+}

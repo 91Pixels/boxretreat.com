@@ -1,0 +1,41 @@
+.footer {
+  background: var(--br-dark);
+  border-top: 1px solid var(--br-mid);
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.social {
+  display: flex;
+  gap: 24px;
+}
+
+.social a {
+  font-size: 20px;
+  color: var(--br-white);
+  transition: opacity 0.15s;
+}
+.social a:hover { opacity: 0.7; }
+
+.made {
+  font-size: 12px;
+  color: var(--br-white);
+  letter-spacing: 0.08em;
+}
+
+.admin {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--br-white);
+  border: 1px solid var(--br-white);
+  padding: 6px 14px;
+  letter-spacing: 0.08em;
+  transition: opacity 0.15s;
+}
+.admin:hover { opacity: 0.7; }

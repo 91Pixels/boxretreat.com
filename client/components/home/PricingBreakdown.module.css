@@ -1,0 +1,22 @@
+.wrap {
+  border-top: 1px solid var(--br-mid);
+  padding-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--br-light);
+}
+.total {
+  border-top: 1px solid var(--br-lightest);
+  padding-top: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--br-white);
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,139 @@
+/* =====================================================
+   BoxRetreat Design System — Dark Surf Palette
+   Mobile-first. Josefin Sans. Zero luxury.
+===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
+
+/* ── BoxRetreat Palette ── */
+:root {
+  --br-darkest:  #110D0D;
+  --br-dark:     #313030;
+  --br-mid:      #686666;
+  --br-light:    #979393;
+  --br-lightest: #C8C3C3;
+  --br-white:    #F5F4F4;
+
+  /* Legacy aliases kept for module CSS compatibility */
+  --black:   #110D0D;
+  --white:   #F5F4F4;
+  --gray-90: #313030;
+  --gray-70: #979393;
+  --gray-50: #686666;
+  --gray-30: #C8C3C3;
+  --gray-10: #313030;
+  --gray-05: #1c1919;
+
+  --font: 'Josefin Sans', 'Century Gothic', sans-serif;
+
+  --tracking-hero: 0.12em;
+  --tracking-h2:   0.06em;
+  --tracking-ui:   0.06em;
+  --tracking-cap:  0.10em;
+
+  --max-w: 1200px;
+  --gutter-mobile:  20px;
+  --gutter-desktop: 48px;
+}
+
+/* ── Reset ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  font-weight: 300;
+  color: var(--br-lightest);
+  background: var(--br-darkest);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, video { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font-family: var(--font); cursor: pointer; }
+
+/* ── Typography scale ── */
+h1 {
+  font-size: clamp(32px, 8vw, 72px);
+  font-weight: 700;
+  letter-spacing: var(--tracking-hero);
+  line-height: 1;
+  color: var(--br-white);
+}
+h2 {
+  font-size: clamp(22px, 5vw, 42px);
+  font-weight: 600;
+  letter-spacing: var(--tracking-h2);
+  color: var(--br-white);
+}
+h3 {
+  font-size: clamp(16px, 3vw, 24px);
+  font-weight: 600;
+  color: var(--br-lightest);
+}
+p { font-size: 16px; line-height: 1.65; color: var(--br-light); }
+
+/* ── Buttons ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--br-lightest);
+  color: var(--br-darkest);
+  border: 2px solid var(--br-lightest);
+  border-radius: 0;
+  padding: 14px 32px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-primary:hover {
+  background: transparent;
+  color: var(--br-lightest);
+}
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--br-lightest);
+  border: 2px solid var(--br-lightest);
+  border-radius: 0;
+  padding: 14px 32px;
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: var(--tracking-ui);
+  text-transform: uppercase;
+  transition: background 0.15s, color 0.15s;
+}
+.btn-ghost:hover {
+  background: var(--br-lightest);
+  color: var(--br-darkest);
+}
+
+/* ── Layout helpers ── */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+@media (min-width: 1024px) {
+  .container { padding: 0 var(--gutter-desktop); }
+}
+
+/* ── Caption label ── */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-cap);
+  text-transform: uppercase;
+  color: var(--br-mid);
+}
+
+/* ── Section spacing ── */
+.section { padding: 64px 0; }
+@media (min-width: 1024px) { .section { padding: 96px 0; } }

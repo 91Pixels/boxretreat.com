@@ -1,0 +1,128 @@
+.section {
+  background: var(--br-dark);
+  border-top: 1px solid var(--br-mid);
+  padding: 48px 0;
+}
+
+.inner {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.priceRow {
+  margin-bottom: 20px;
+}
+.price { font-size: 28px; font-weight: 700; color: var(--br-white); }
+.perNight { font-size: 14px; color: var(--br-light); }
+
+.dateGrid {
+  display: flex;
+  border: 1px solid var(--br-mid);
+  cursor: pointer;
+  margin-bottom: 10px;
+  user-select: none;
+  transition: border-color 0.15s;
+}
+.dateGrid:hover { border-color: var(--br-lightest); }
+
+.dateBox {
+  flex: 1;
+  padding: 14px;
+}
+.dateDivider {
+  width: 1px;
+  background: var(--br-mid);
+}
+.dateVal { font-size: 14px; font-weight: 600; color: var(--br-lightest); margin-top: 4px; }
+
+.calendarWrap {
+  border: 1px solid var(--br-mid);
+  border-top: none;
+  padding: 12px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+  background: var(--br-darkest);
+}
+.calendarWrap :global(.rdp-day_selected) {
+  background: var(--br-lightest) !important;
+  color: var(--br-darkest) !important;
+  border-radius: 0 !important;
+}
+.calendarWrap :global(.rdp-day_range_middle) {
+  background: var(--br-dark) !important;
+  color: var(--br-lightest) !important;
+  border-radius: 0 !important;
+}
+.calendarWrap :global(.rdp-button:hover:not([disabled])) {
+  background: var(--br-dark) !important;
+  border-radius: 0 !important;
+}
+.calendarWrap :global(.rdp) {
+  color: var(--br-lightest);
+}
+
+.guestRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--br-mid);
+  padding: 14px;
+  margin-bottom: 8px;
+}
+.guestLabel {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--br-lightest);
+}
+.counter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-weight: 700;
+  color: var(--br-lightest);
+}
+.counter button {
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--br-mid);
+  background: none;
+  color: var(--br-lightest);
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.counter button:hover {
+  background: var(--br-lightest);
+  color: var(--br-darkest);
+}
+
+.guestDisplay {
+  font-size: 11px;
+  color: var(--br-mid);
+  margin-bottom: 16px;
+}
+
+.reserveBtn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 16px;
+  font-size: 14px;
+  padding: 16px;
+}
+.reserveBtn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.error {
+  color: #e05a5a;
+  font-size: 13px;
+  margin-top: 8px;
+}
+.noCharge {
+  text-align: center;
+  font-size: 12px;
+  color: var(--br-mid);
+  margin-top: 10px;
+}

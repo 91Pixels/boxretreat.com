@@ -1,0 +1,51 @@
+.section {
+  padding: 48px 0;
+}
+
+.inner {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.title {
+  font-size: clamp(20px, 5vw, 32px);
+  font-weight: 600;
+  color: var(--br-white);
+  margin: 12px 0 16px;
+}
+
+.ecoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--br-light);
+  border: 1px solid var(--br-mid);
+  padding: 4px 10px;
+  margin-bottom: 24px;
+}
+.ecoBadge i { color: var(--br-lightest); }
+
+.grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border: 1px solid var(--br-mid);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--br-lightest);
+  transition: border-color 0.15s;
+}
+.item:hover { border-color: var(--br-lightest); }
+.item i { font-size: 16px; color: var(--br-light); flex-shrink: 0; }

@@ -1,0 +1,295 @@
+.hero {
+  background: var(--br-darkest);
+  padding: 80px 0 40px;
+  border-bottom: 1px solid var(--br-mid);
+}
+
+.heroTitle {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: var(--br-white);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+
+.heroSub {
+  font-size: 15px;
+  color: var(--br-light);
+  max-width: 480px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  border: 1px solid var(--br-mid);
+  background: var(--br-dark);
+  transition: border-color 0.15s;
+}
+.card:hover { border-color: var(--br-lightest); }
+.card.selected { border-color: var(--br-lightest); }
+
+.cardBody { padding: 20px; }
+
+.cardIcon {
+  font-size: 32px;
+  color: var(--br-lightest);
+  margin-bottom: 12px;
+}
+
+.cardName {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--br-white);
+  margin-bottom: 4px;
+}
+
+.cardDesc {
+  font-size: 13px;
+  color: var(--br-light);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.cardPrice {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--br-white);
+}
+
+.cardPriceSub {
+  font-size: 12px;
+  color: var(--br-mid);
+  margin-left: 4px;
+}
+
+.selectBtn {
+  width: 100%;
+  padding: 12px;
+  justify-content: center;
+  margin-top: 16px;
+  font-size: 13px;
+}
+
+.bookingPanel {
+  position: sticky;
+  top: 80px;
+  border: 1px solid var(--br-mid);
+  background: var(--br-dark);
+  padding: 24px;
+}
+
+.panelTitle {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--br-white);
+  margin-bottom: 20px;
+}
+
+.dateGridRow {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.dateGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  flex: 1;
+}
+
+.clearDates {
+  background: none;
+  border: 1px solid var(--br-mid);
+  color: var(--br-mid);
+  width: 36px;
+  flex-shrink: 0;
+  cursor: pointer;
+  font-size: 14px;
+  transition: border-color 0.15s, color 0.15s;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.clearDates:hover {
+  border-color: var(--br-lightest);
+  color: var(--br-lightest);
+}
+
+.dateBox {
+  border: 1px solid var(--br-mid);
+  padding: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.dateBox:hover { border-color: var(--br-lightest); }
+
+.dateLabel {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--br-mid);
+  margin-bottom: 4px;
+}
+
+.dateVal {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--br-lightest);
+}
+
+.calendarWrap {
+  border: 1px solid var(--br-mid);
+  border-top: none;
+  background: var(--br-darkest);
+  padding: 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+}
+
+/* v10: variables live on .rdp-root — override them there directly */
+.calendarWrap :global(.rdp-root) {
+  --rdp-accent-color: #C8C3C3;           /* --br-lightest */
+  --rdp-accent-background-color: rgba(200,195,195,0.12);
+  --rdp-today-color: #C8C3C3;
+  --rdp-day_button-border-radius: 0px;
+  --rdp-selected-border: 2px solid #C8C3C3;
+  --rdp-range_start-color: #110D0D;      /* --br-darkest */
+  --rdp-range_end-color: #110D0D;
+  --rdp-range_start-date-background-color: #C8C3C3;
+  --rdp-range_end-date-background-color: #C8C3C3;
+  --rdp-range_middle-background-color: rgba(200,195,195,0.12);
+  --rdp-range_middle-color: #C8C3C3;
+  color: #C8C3C3;
+}
+
+/* Chevrons (nav arrows) use fill not color */
+.calendarWrap :global(.rdp-chevron) {
+  fill: #979393 !important;  /* --br-light */
+}
+
+/* Today — underline instead of blue dot */
+.calendarWrap :global(.rdp-today:not(.rdp-outside)) {
+  color: #F5F4F4 !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Hover on day buttons */
+.calendarWrap :global(.rdp-day_button:hover:not(:disabled)) {
+  background: #313030 !important;  /* --br-dark */
+}
+
+/* Disabled days */
+.calendarWrap :global(.rdp-disabled) {
+  opacity: 0.2;
+}
+
+.field { margin-bottom: 12px; }
+
+.fieldLabel {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--br-mid);
+  margin-bottom: 6px;
+}
+
+.input {
+  width: 100%;
+  background: var(--br-darkest);
+  border: 1px solid var(--br-mid);
+  color: var(--br-lightest);
+  padding: 12px;
+  font-family: var(--font);
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input:focus { border-color: var(--br-lightest); }
+.input::placeholder { color: var(--br-mid); }
+
+.summary {
+  border-top: 1px solid var(--br-mid);
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--br-light);
+  margin-bottom: 8px;
+}
+
+.summaryTotal {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--br-white);
+}
+
+.reserveBtn {
+  width: 100%;
+  justify-content: center;
+  margin-top: 16px;
+  padding: 16px;
+}
+
+.error {
+  color: #e05a5a;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+.note {
+  font-size: 11px;
+  color: var(--br-mid);
+  text-align: center;
+  margin-top: 8px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr 380px;
+  }
+}
+
+
+.availBadge {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  min-height: 40px;
+}
+
+.availBadge[data-avail="yes"] {
+  background: rgba(16, 185, 129, 0.1);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.availBadge[data-avail="no"] {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.availBadge[data-avail="checking"] {
+  background: rgba(100, 100, 100, 0.08);
+  color: var(--gray-70, #777);
+  border: 1px solid var(--br-mid, #2a2a2a);
+}

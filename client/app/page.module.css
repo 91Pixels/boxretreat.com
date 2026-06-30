@@ -1,0 +1,33 @@
+.mainGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter-mobile);
+}
+@media (min-width: 768px) {
+  .mainGrid { padding: 0 var(--gutter-desktop); }
+}
+@media (min-width: 1024px) {
+  .mainGrid {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 64px;
+  }
+  .sections { flex: 1.4; }
+  .bookingAside {
+    flex: 1;
+    padding-top: 64px;
+  }
+}
+
+/* Mobile: booking widget above content */
+@media (max-width: 1023px) {
+  .bookingAside {
+    order: -1;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--br-mid);
+    margin-bottom: 0;
+  }
+}

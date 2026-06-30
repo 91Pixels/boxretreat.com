@@ -1,0 +1,30 @@
+.bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 24px;
+  background: var(--br-dark);
+  border-bottom: 1px solid var(--br-mid);
+  flex-wrap: wrap;
+}
+
+.stars {
+  color: var(--br-lightest);
+  font-size: 13px;
+  letter-spacing: 2px;
+}
+
+.num {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--br-white);
+}
+
+.dot {
+  color: var(--br-mid);
+}
+
+.count {
+  font-size: 13px;
+  color: var(--br-light);
+}

@@ -1,0 +1,104 @@
+.wrap {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 24px;
+  background: var(--gray-05);
+}
+
+.card {
+  background: var(--white);
+  border: 1px solid var(--black);
+  max-width: 520px;
+  width: 100%;
+  padding: 48px 32px;
+  text-align: center;
+}
+@media (min-width: 640px) { .card { padding: 56px 48px; } }
+
+.iconSuccess {
+  width: 72px;
+  height: 72px;
+  border: 2px solid var(--black);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  background: var(--black);
+  color: var(--white);
+}
+
+.iconError {
+  width: 72px;
+  height: 72px;
+  border: 2px solid var(--gray-30);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--gray-70);
+}
+
+.title {
+  margin-bottom: 12px;
+  font-size: clamp(20px, 4vw, 28px);
+}
+
+.sub {
+  font-size: 14px;
+  color: var(--gray-70);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.bookingId {
+  background: var(--gray-05);
+  border: 1px solid var(--gray-10);
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+.bookingId strong {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+}
+
+.details {
+  border: 1px solid var(--gray-10);
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.detailRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--gray-10);
+}
+.detailRow:last-child { border-bottom: none; }
+.detailRow span { color: var(--gray-70); }
+
+.totalRow {
+  background: var(--gray-05);
+  font-weight: 700;
+}
+.totalRow span, .totalRow strong { color: var(--black); font-size: 15px; }
+
+.actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}

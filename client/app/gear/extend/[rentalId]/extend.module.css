@@ -1,0 +1,133 @@
+.wrap {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  background: var(--br-deep, #0a0a0a);
+}
+
+.card {
+  background: var(--br-surface, #141414);
+  border: 1px solid var(--br-mid, #2a2a2a);
+  border-radius: 12px;
+  padding: 48px;
+  max-width: 440px;
+  width: 100%;
+}
+
+.icon {
+  font-size: 48px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--br-text, #f5f5f5);
+  margin: 0 0 12px;
+}
+
+.sub {
+  font-size: 15px;
+  color: var(--gray-70, #777);
+  margin: 0 0 32px;
+  line-height: 1.6;
+}
+
+.field {
+  margin-bottom: 24px;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gray-70, #777);
+  margin-bottom: 12px;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.stepBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  border: 1px solid var(--br-mid, #2a2a2a);
+  background: var(--br-deep, #0a0a0a);
+  color: var(--br-text, #f5f5f5);
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stepVal {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--br-text, #f5f5f5);
+  min-width: 40px;
+  text-align: center;
+}
+
+.summary {
+  border: 1px solid var(--br-mid, #2a2a2a);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 24px;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--gray-70, #777);
+  padding: 4px 0;
+}
+
+.summaryTotal {
+  font-weight: 700;
+  color: var(--br-text, #f5f5f5);
+  font-size: 16px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--br-mid, #2a2a2a);
+}
+
+.error {
+  color: #ef4444;
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: var(--br-accent, #2563eb);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.note {
+  font-size: 12px;
+  color: var(--gray-50, #555);
+  text-align: center;
+  margin-top: 12px;
+}

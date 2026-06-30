@@ -1,0 +1,110 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: transparent;
+  transition: background 0.25s, border-bottom 0.25s;
+}
+.scrolled {
+  background: rgba(17, 13, 13, 0.96);
+  border-bottom: 1px solid var(--br-mid);
+  backdrop-filter: blur(8px);
+}
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 16px 20px;
+}
+.logo {
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--br-white);
+  transition: opacity 0.2s;
+}
+.logo:hover { opacity: 0.75; }
+.logo span { color: var(--br-light); }
+
+/* Desktop links */
+.links {
+  display: none;
+  gap: 32px;
+  align-items: center;
+}
+.links a {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: var(--tracking-cap);
+  text-transform: uppercase;
+  color: var(--br-lightest);
+  transition: color 0.15s;
+}
+.links a:hover { color: var(--br-white); }
+.ctaLink {
+  border: 1.5px solid var(--br-mid) !important;
+  padding: 8px 20px;
+  color: var(--br-lightest) !important;
+}
+.ctaLink:hover {
+  border-color: var(--br-lightest) !important;
+  color: var(--br-white) !important;
+}
+
+@media (min-width: 768px) {
+  .links { display: flex; }
+  .hamburger { display: none; }
+}
+
+/* Hamburger */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--br-lightest);
+  transition: background 0.25s;
+}
+
+/* Mobile menu */
+@media (max-width: 767px) {
+  .links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--br-darkest);
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+  }
+  .linksOpen {
+    transform: translateX(0);
+  }
+  .links a {
+    font-size: 20px;
+    color: var(--br-lightest) !important;
+  }
+  .ctaLink {
+    border-color: var(--br-mid) !important;
+  }
+}

@@ -1,0 +1,30 @@
+.section { background: var(--gray-05); }
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+@media (min-width: 1024px) {
+  .grid { flex-direction: row; align-items: flex-start; }
+  .map { flex: 1.2; }
+  .distances { flex: 1; }
+}
+.map {
+  width: 100%;
+  height: 320px;
+  border: 1px solid var(--black);
+  overflow: hidden;
+}
+@media (min-width: 1024px) { .map { height: 400px; } }
+.distances { display: flex; flex-direction: column; gap: 0; }
+.distRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-10);
+}
+.distRow:first-child { border-top: 1px solid var(--gray-10); }
+.distIcon { font-size: 20px; width: 28px; text-align: center; flex-shrink: 0; }
+.distPlace { flex: 1; font-size: 14px; font-weight: 600; }
+.distTime { font-size: 13px; color: var(--gray-70); font-weight: 700; }
