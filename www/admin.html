@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BoxRetreat â€” Owner Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+
+    <link rel="icon" type="image/ico" href="favicon.ico" />
+    <link href="style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Typography system: premium serials (local @font-face via typography.css) +
+         open-source CDN fallbacks (Cormorant Garamond, DM Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link href="css/rental.css" rel="stylesheet" />
+    <link href="css/admin-marketing.css" rel="stylesheet" />
+    <link href="css/admin-reports.css" rel="stylesheet" />
+</head>
+
+<body class="hidden admin-body">
+
+<!-- ═══════════════════════════════════════════
+     ROLE GATE — shown if admin not logged in
+═══════════════════════════════════════════ -->
+<div class="admin-gate" id="admin-gate" style="display:none;">
+    <div class="admin-gate-box">
+        <div class="admin-gate-logo">Box<span>Retreat</span></div>
+        <p class="admin-gate-sub">Owner Dashboard · Private Access</p>
+        <form id="admin-gate-form" autocomplete="off">
+            <input type="email"    id="gate-email"    placeholder="Owner email"    required />
+            <input type="password" id="gate-password" placeholder="Password"       required />
+            <button type="submit" class="btn-admin-login">
+                <i class="fa fa-lock"></i> Enter Dashboard
+            </button>
+        </form>
+        <p class="admin-gate-error" id="gate-error"></p>
+    </div>
+</div>
+
+<div id="admin-wrap">
+
+    <!-- Top Bar -->
+    <div class="admin-topbar">
+        <div class="admin-topbar-left">
+            <span style="font-family:'Futura','Century Gothic','Josefin Sans',sans-serif;font-weight:700;font-size:18px;color:#fff;letter-spacing:-0.5px;">Box<span style="color:#000000;">Retreat</span></span>
+            <span class="admin-page-label">Owner Dashboard</span>
+        </div>
+        <div class="admin-topbar-right">
+            <span class="admin-property-tag"><i class="fa fa-map-marker"></i> Luquillo, Puerto Rico</span>
+            <a href="shop.html" class="admin-view-site" style="margin-right:8px;"><i class="fa fa-shopping-bag"></i> Shop</a>
+            <a href="rental.html" class="admin-view-site"><i class="fa fa-external-link"></i> View Listing</a>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="admin-content">
+
+        <!-- Stats -->
+        <div class="admin-stats-row" id="admin-stats-row">
+            <div class="admin-stat-card">
+                <div class="stat-icon" style="background:#0A0A0A;"><i class="fa fa-calendar-check-o"></i></div>
+                <div><p class="stat-label">Total Reservations</p><p class="stat-value" id="stat-total">0</p></div>
+            </div>
+            <div class="admin-stat-card">
+                <div class="stat-icon" style="background:#16a34a;"><i class="fa fa-check-circle"></i></div>
+                <div><p class="stat-label">Confirmed</p><p class="stat-value" id="stat-confirmed">0</p></div>
+            </div>
+            <div class="admin-stat-card">
+                <div class="stat-icon" style="background:#000000;"><i class="fa fa-dollar"></i></div>
+                <div><p class="stat-label">Total Revenue</p><p class="stat-value" id="stat-revenue">$0</p></div>
+            </div>
+            <div class="admin-stat-card">
+                <div class="stat-icon" style="background:#f59e0b;"><i class="fa fa-bed"></i></div>
+                <div><p class="stat-label">Nights Booked</p><p class="stat-value" id="stat-nights">0</p></div>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="admin-tabs">
+            <button class="admin-tab active" data-tab="reservations"><i class="fa fa-list"></i> Reservations</button>
+            <button class="admin-tab" data-tab="pricing"><i class="fa fa-tag"></i> Pricing</button>
+            <button class="admin-tab" data-tab="blocked"><i class="fa fa-ban"></i> Blocked Dates</button>
+            <button class="admin-tab" data-tab="marketing"><i class="fa fa-bar-chart"></i> Marketing ROI</button>
+            <button class="admin-tab" data-tab="costs"><i class="fa fa-dollar"></i> Costs &amp; Products</button>
+            <button class="admin-tab" data-tab="leads"><i class="fa fa-users"></i> Leads</button>
+            <button class="admin-tab" data-tab="reports"><i class="fa fa-line-chart"></i> P&amp;L Reports</button>
+        </div>
+
+        <!-- Tab: Reservations -->
+        <div class="admin-tab-panel active" id="tab-reservations">
+            <div class="admin-section-header">
+                <h2>All Reservations</h2>
+                <div class="admin-filter-row">
+                    <input type="text" id="res-search" placeholder="Search by name, email, or IDâ€¦" />
+                    <select id="res-filter-status">
+                        <option value="">All Status</option>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+            </div>
+            <div class="admin-table-wrap">
+                <table class="admin-table" id="reservations-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Guest</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Nights</th>
+                            <th>Guests</th>
+                            <th>Total</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservations-body">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+                <div class="admin-empty" id="res-empty" style="display:none">
+                    <i class="fa fa-calendar-o" style="font-size:36px;color:#e5e7eb;"></i>
+                    <strong>No reservations yet</strong>
+                    <span>Reservations will appear here after guests book.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Pricing -->
+        <div class="admin-tab-panel" id="tab-pricing">
+            <div class="admin-pricing-section">
+                <h2>Pricing Settings</h2>
+                <p style="color:#717171;font-size:14px;margin:0 0 20px;">Changes take effect for new bookings immediately.</p>
+                <div class="pricing-card">
+                    <div class="pricing-row">
+                        <label>Nightly rate <span class="price-note">base price / night</span></label>
+                        <div class="price-input-wrap">
+                            <span class="price-dollar">$</span>
+                            <input type="number" id="price-night" value="185" min="50" max="2000" step="5" />
+                        </div>
+                    </div>
+                    <div class="pricing-row">
+                        <label>Cleaning fee <span class="price-note">one-time per stay</span></label>
+                        <div class="price-input-wrap">
+                            <span class="price-dollar">$</span>
+                            <input type="number" id="price-cleaning" value="75" min="0" max="500" step="5" />
+                        </div>
+                    </div>
+                    <div class="pricing-row" style="border:none;">
+                        <label>Service fee <span class="price-note">% of nightly total</span></label>
+                        <div class="price-input-wrap">
+                            <input type="number" id="price-service" value="14" min="0" max="30" style="width:70px;font-size:18px;" />
+                            <span class="price-dollar">%</span>
+                        </div>
+                    </div>
+
+                    <div class="pricing-preview">
+                        <h4>3-night stay preview</h4>
+                        <div class="preview-row"><span id="prev-nights-label">$185 &times; 3 nights</span><span id="prev-nights-val">$555</span></div>
+                        <div class="preview-row"><span>Cleaning fee</span><span id="prev-cleaning-val">$75</span></div>
+                        <div class="preview-row"><span>Service fee</span><span id="prev-service-val">$87</span></div>
+                        <div class="preview-row"><span>Taxes (11.5%)</span><span id="prev-tax-val">$82</span></div>
+                        <div class="preview-row total"><span>Estimated total</span><span id="prev-total-val">$799</span></div>
+                    </div>
+
+                    <button class="btn-save-price" id="btn-save-price"><i class="fa fa-save"></i> Save Pricing</button>
+                    <div class="price-saved-note" id="price-saved-note" style="display:none"><i class="fa fa-check-circle"></i> Pricing saved successfully!</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Blocked Dates -->
+        <div class="admin-tab-panel" id="tab-blocked">
+            <div class="admin-blocked-section">
+                <h2>Blocked Dates</h2>
+                <p style="color:#717171;font-size:14px;margin:0 0 20px;">Click dates on the calendar to block or unblock them. Blocked dates cannot be booked by guests.</p>
+                <div class="blocked-layout">
+                    <div class="blocked-cal-wrap">
+                        <div id="blocked-calendar"></div>
+                    </div>
+                    <div class="blocked-list-wrap">
+                        <h4>Blocked dates <span class="blocked-count" id="blocked-count">0</span></h4>
+                        <div class="blocked-tags" id="blocked-tags"></div>
+                        <p class="blocked-empty" id="blocked-empty">No dates blocked. Click the calendar to block dates.</p>
+                        <div class="blocked-actions" id="blocked-actions" style="display:none">
+                            <button class="btn-clear-blocked" id="btn-clear-blocked"><i class="fa fa-trash"></i> Clear all blocked dates</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Marketing ROI -->
+        <div class="admin-tab-panel" id="tab-marketing">
+
+            <!-- KPI Cards -->
+            <div class="mkt-kpi-row">
+                <div class="mkt-kpi-card">
+                    <span class="kpi-label">Total Revenue</span>
+                    <span class="kpi-value" id="mkt-kpi-revenue">$0</span>
+                    <span class="kpi-sub">All confirmed bookings</span>
+                </div>
+                <div class="mkt-kpi-card">
+                    <span class="kpi-label">Total Ad Spend</span>
+                    <span class="kpi-value" id="mkt-kpi-spend">$0</span>
+                    <span class="kpi-sub">Meta + Google + TikTok</span>
+                </div>
+                <div class="mkt-kpi-card">
+                    <span class="kpi-label">ROI</span>
+                    <span class="kpi-value" id="mkt-kpi-roi">N/A</span>
+                    <span class="kpi-sub">(Revenue − Spend) ÷ Spend</span>
+                </div>
+                <div class="mkt-kpi-card">
+                    <span class="kpi-label">Cost per Booking</span>
+                    <span class="kpi-value" id="mkt-kpi-cpa">N/A</span>
+                    <span class="kpi-sub">Spend ÷ confirmed bookings</span>
+                </div>
+                <div class="mkt-kpi-card">
+                    <span class="kpi-label">Confirmed Bookings</span>
+                    <span class="kpi-value" id="mkt-kpi-bookings">0</span>
+                    <span class="kpi-sub">All time</span>
+                </div>
+                <div class="mkt-kpi-card">
+                    <span class="kpi-label">This Month — Spend</span>
+                    <span class="kpi-value" id="mkt-kpi-month-spend">$0</span>
+                    <span class="kpi-sub" id="mkt-kpi-month-rev-sub">Revenue: <span id="mkt-kpi-month-rev">$0</span></span>
+                </div>
+                <div class="mkt-kpi-card" style="grid-column: span 2;">
+                    <span class="kpi-label">Occupancy — This Month</span>
+                    <span class="kpi-value" id="mkt-kpi-occupancy">0%</span>
+                    <div class="occupancy-bar-wrap">
+                        <div class="occupancy-bar-track">
+                            <div class="occupancy-bar-fill" id="mkt-occupancy-bar" style="width:0%"></div>
+                        </div>
+                        <div class="occupancy-label">
+                            <span>0 nights</span>
+                            <span>30 nights</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid: Add Spend | ROI Breakdown | Bar Chart -->
+            <div class="mkt-grid">
+
+                <!-- Add Ad Spend Form -->
+                <div class="mkt-panel">
+                    <h3><i class="fa fa-plus-circle"></i> Log Ad Spend</h3>
+                    <form class="spend-form" id="mkt-spend-form" autocomplete="off">
+                        <div class="spend-row">
+                            <label>Platform</label>
+                            <select id="mkt-platform" style="border:1.5px solid #e5e7eb;border-radius:8px;padding:0 12px;height:40px;font-size:14px;font-family:var(--font-body);outline:none;width:100%;">
+                                <option value="meta">📘 Meta (Facebook / Instagram)</option>
+                                <option value="google">🔍 Google Ads</option>
+                                <option value="tiktok">🎵 TikTok Ads</option>
+                                <option value="other">📣 Other</option>
+                            </select>
+                        </div>
+                        <div class="spend-row">
+                            <label>Campaign Name <span style="font-weight:400;color:#aaa;">(optional)</span></label>
+                            <div class="spend-input-wrap">
+                                <input type="text" id="mkt-campaign" placeholder="e.g. Summer Surf 2026" />
+                            </div>
+                        </div>
+                        <div class="spend-row">
+                            <label>Period</label>
+                            <div class="spend-period">
+                                <input type="month" id="mkt-period" />
+                            </div>
+                        </div>
+                        <div class="spend-row">
+                            <label>Amount Spent</label>
+                            <div class="spend-input-wrap">
+                                <span class="spend-prefix">$</span>
+                                <input type="number" id="mkt-spend-amount" placeholder="0.00" min="0" step="0.01" />
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-save-spend">
+                            <i class="fa fa-save"></i> Save Entry
+                        </button>
+                    </form>
+                </div>
+
+                <!-- ROI Breakdown -->
+                <div class="mkt-panel">
+                    <h3><i class="fa fa-calculator"></i> ROI Breakdown (All Time)</h3>
+                    <div class="roi-result-grid">
+                        <div class="roi-result-row">
+                            <span class="rr-label">Total Revenue (confirmed stays)</span>
+                            <span class="rr-value" id="roi-total-revenue">$0</span>
+                        </div>
+                        <div class="roi-result-row">
+                            <span class="rr-label">Total Ad Spend</span>
+                            <span class="rr-value" id="roi-total-spend">$0</span>
+                        </div>
+                        <div class="roi-result-row">
+                            <span class="rr-label">Gross Profit (Revenue − Spend)</span>
+                            <span class="rr-value" id="roi-profit">$0</span>
+                        </div>
+                        <div class="roi-result-row roi-total">
+                            <span class="rr-label">ROI</span>
+                            <span class="rr-value" id="roi-roi" style="font-size:22px;">N/A</span>
+                        </div>
+                        <div class="roi-result-row">
+                            <span class="rr-label">Cost per Acquisition (CPA)</span>
+                            <span class="rr-value" id="roi-cpa">N/A</span>
+                        </div>
+                    </div>
+                    <p style="font-size:11px;color:#aaa;margin:18px 0 0;line-height:1.5;">
+                        ROI = (Revenue − Spend) ÷ Spend × 100<br>
+                        CPA = Total Spend ÷ Confirmed Bookings
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Revenue vs Spend Bar Chart -->
+            <div class="mkt-panel" style="margin-bottom:20px;">
+                <h3><i class="fa fa-line-chart"></i> Revenue vs. Ad Spend — Last 6 Months</h3>
+                <div class="mkt-bar-legend">
+                    <div class="mkt-legend-item">
+                        <div class="mkt-legend-dot" style="background:#000000;"></div>
+                        Revenue
+                    </div>
+                    <div class="mkt-legend-item">
+                        <div class="mkt-legend-dot" style="background:#f59e0b;"></div>
+                        Ad Spend
+                    </div>
+                </div>
+                <div class="mkt-bar-chart" id="mkt-bar-chart"></div>
+            </div>
+
+            <!-- Ad Spend History Table -->
+            <div class="mkt-panel">
+                <h3><i class="fa fa-history"></i> Ad Spend History</h3>
+                <div class="admin-table-wrap">
+                    <table class="mkt-history-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Platform</th>
+                                <th>Campaign</th>
+                                <th>Spend</th>
+                                <th>Revenue (that period)</th>
+                                <th>ROI</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="mkt-history-body"></tbody>
+                    </table>
+                    <p class="mkt-empty" id="mkt-history-empty" style="display:none;">
+                        No ad spend logged yet. Use the form above to add your first entry.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Tab: Marketing ROI -->
+
+        <!-- ══════════════════════════════════════════════
+             Tab: Costs & Products
+        ══════════════════════════════════════════════ -->
+        <div class="admin-tab-panel" id="tab-costs">
+
+            <!-- Daily Op Cost -->
+            <div class="opcost-card">
+                <div class="opcost-left">
+                    <h4><i class="fa fa-home"></i> Property Daily Operational Cost</h4>
+                    <p>Fixed cost per day the property is rented (utilities, maintenance, supplies).</p>
+                </div>
+                <div class="opcost-input-wrap">
+                    <span>$</span>
+                    <input type="number" id="opcost-input" min="0" step="1" placeholder="45" />
+                    <button class="btn-save-opcost" id="btn-save-opcost">Save</button>
+                </div>
+            </div>
+
+            <!-- Product Catalog -->
+            <div class="fin-panel">
+                <h3><i class="fa fa-shopping-bag"></i> Product Catalog — Sell Price &amp; Unit Cost</h3>
+
+                <form class="product-add-form" id="paf-form">
+                    <div class="paf-field">
+                        <label>Product Name</label>
+                        <input type="text" id="paf-name" placeholder="e.g. BoxRetreat T-Shirt" required />
+                    </div>
+                    <div class="paf-field">
+                        <label>Category</label>
+                        <select id="paf-category">
+                            <option value="apparel">Apparel</option>
+                            <option value="surf">Surf</option>
+                            <option value="water">Water Sports</option>
+                            <option value="general">General</option>
+                        </select>
+                    </div>
+                    <div class="paf-field">
+                        <label>Sell Price $</label>
+                        <input type="number" id="paf-sell" min="0" step="0.01" placeholder="28.00" required />
+                    </div>
+                    <div class="paf-field">
+                        <label>Unit Cost $</label>
+                        <input type="number" id="paf-cost" min="0" step="0.01" placeholder="12.00" required />
+                    </div>
+                    <div class="paf-field">
+                        <label>Stock (units)</label>
+                        <input type="number" id="paf-stock" min="0" step="1" placeholder="0" />
+                    </div>
+                    <button type="submit" class="btn-add-product" id="btn-add-product">+ Add Product</button>
+                </form>
+
+                <div class="product-grid" id="product-grid"></div>
+            </div>
+
+            <!-- Cost Entries CRUD -->
+            <div class="fin-panel">
+                <h3><i class="fa fa-list-alt"></i> Cost Entries Log</h3>
+                <p style="font-size:13px;color:#717171;margin:0 0 16px;">
+                    Log daily property costs, product COGS (cost of goods sold), and ad spend.
+                    These feed directly into the P&amp;L reports.
+                </p>
+
+                <form class="cost-form" id="cost-entry-form">
+                    <div class="cost-form-field">
+                        <label>Date</label>
+                        <input type="date" id="cost-date" required />
+                    </div>
+                    <div class="cost-form-field">
+                        <label>Type</label>
+                        <select id="cost-type">
+                            <option value="property">Property Op Cost</option>
+                            <option value="product">Product / COGS</option>
+                            <option value="adspend">Ad Spend</option>
+                        </select>
+                    </div>
+                    <div class="cost-form-field" id="cost-platform-row" style="display:none;">
+                        <label>Platform</label>
+                        <select id="cost-platform">
+                            <option value="meta">Meta</option>
+                            <option value="google">Google</option>
+                            <option value="tiktok">TikTok</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="cost-form-field">
+                        <label>Description</label>
+                        <input type="text" id="cost-desc" placeholder="e.g. 3 T-shirts sold" />
+                    </div>
+                    <div class="cost-form-field">
+                        <label>Amount $</label>
+                        <input type="number" id="cost-amount" min="0" step="0.01" placeholder="0.00" required />
+                    </div>
+                    <button type="submit" class="btn-add-cost">+ Add Entry</button>
+                </form>
+
+                <div class="admin-table-wrap">
+                    <table class="costs-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                                <th>Platform</th>
+                                <th>Amount</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="costs-body"></tbody>
+                    </table>
+                    <p id="costs-empty" style="display:none;text-align:center;padding:24px;color:#717171;font-size:14px;">
+                        No cost entries yet. Add your first entry above.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Tab: Costs & Products -->
+
+        <!-- ══════════════════════════════════════════════
+             Tab: Leads
+        ══════════════════════════════════════════════ -->
+        <div class="admin-tab-panel" id="tab-leads">
+
+            <div class="fin-panel">
+                <h3><i class="fa fa-user-plus"></i> Register Lead / Conversion</h3>
+                <p style="font-size:13px;color:#717171;margin:0 0 16px;">
+                    A lead is a client who completed a rental or purchase.
+                    Assign the marketing cost (CPA) to calculate true net profit per acquisition.
+                </p>
+
+                <form id="lead-form">
+                    <div class="lead-form">
+                        <div class="lead-form-field lead-form-full">
+                            <label>Link to Reservation (optional — auto-fills fields)</label>
+                            <select id="lead-reservation-id">
+                                <option value="">— None / manual entry —</option>
+                            </select>
+                        </div>
+                        <div class="lead-form-field">
+                            <label>Date</label>
+                            <input type="date" id="lead-date" required />
+                        </div>
+                        <div class="lead-form-field">
+                            <label>Type</label>
+                            <select id="lead-type">
+                                <option value="rental">Rental</option>
+                                <option value="product">Product Sale</option>
+                            </select>
+                        </div>
+                        <div class="lead-form-field">
+                            <label>Guest / Client Name</label>
+                            <input type="text" id="lead-name" placeholder="Ana Rivera" />
+                        </div>
+                        <div class="lead-form-field">
+                            <label>Email</label>
+                            <input type="email" id="lead-email" placeholder="ana@example.com" />
+                        </div>
+                        <div class="lead-form-field">
+                            <label>Revenue (Gross $)</label>
+                            <input type="number" id="lead-revenue" min="0" step="0.01" placeholder="1200.00" required />
+                        </div>
+                        <div class="lead-form-field">
+                            <label>CPA — Ad Cost Attributed $</label>
+                            <input type="number" id="lead-cpa" min="0" step="0.01" placeholder="70.00" />
+                        </div>
+                        <div class="lead-form-field">
+                            <label>Operational Cost $</label>
+                            <input type="number" id="lead-opcost" min="0" step="0.01" placeholder="45.00" />
+                        </div>
+                        <div class="lead-form-field">
+                            <label>COGS (product cost) $</label>
+                            <input type="number" id="lead-cogs" min="0" step="0.01" placeholder="0.00" />
+                        </div>
+                        <div class="lead-form-field">
+                            <label>Source</label>
+                            <select id="lead-source">
+                                <option value="organic">🌱 Organic</option>
+                                <option value="direct">🔗 Direct</option>
+                                <option value="meta">📘 Meta Ads</option>
+                                <option value="google">🔍 Google Ads</option>
+                                <option value="tiktok">🎵 TikTok Ads</option>
+                            </select>
+                        </div>
+                        <div class="lead-form-field">
+                            <label>Campaign (optional)</label>
+                            <input type="text" id="lead-campaign" placeholder="Summer Surf 2026" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-add-lead">
+                        <i class="fa fa-plus"></i> Register Lead
+                    </button>
+                </form>
+            </div>
+
+            <div class="fin-panel">
+                <h3><i class="fa fa-table"></i> Lead History</h3>
+                <div class="leads-table-wrap">
+                    <table class="leads-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Client</th>
+                                <th>Source</th>
+                                <th>Revenue</th>
+                                <th>CPA $</th>
+                                <th>Op Cost</th>
+                                <th>COGS</th>
+                                <th>Net Profit</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="leads-tbody"></tbody>
+                    </table>
+                    <p class="leads-empty" id="leads-empty" style="display:none;">
+                        No leads yet. Register your first conversion above.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <!-- /Tab: Leads -->
+
+        <!-- ══════════════════════════════════════════════
+             Tab: P&L Reports
+        ══════════════════════════════════════════════ -->
+        <div class="admin-tab-panel" id="tab-reports">
+
+            <!-- Period Filter -->
+            <div class="report-filter-bar">
+                <span class="filter-label">Period:</span>
+                <button class="period-btn" data-period="today">Today</button>
+                <button class="period-btn" data-period="week">This Week</button>
+                <button class="period-btn active" data-period="month">This Month</button>
+                <button class="period-btn" data-period="custom">Custom</button>
+                <div id="custom-range-row" style="display:none;" class="custom-range">
+                    <input type="date" id="custom-from" />
+                    <span style="color:#aaa;">→</span>
+                    <input type="date" id="custom-to" />
+                    <button class="btn-apply-range" id="btn-apply-range">Apply</button>
+                </div>
+                <span style="font-size:12px;color:#aaa;margin-left:auto;" id="rep-period-label"></span>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="fin-kpi-row">
+                <div class="fin-kpi-card revenue">
+                    <div class="fin-kpi-label">Gross Revenue</div>
+                    <div class="fin-kpi-value" id="rep-revenue">$0</div>
+                    <div class="fin-kpi-sub">All confirmed income</div>
+                </div>
+                <div class="fin-kpi-card costs">
+                    <div class="fin-kpi-label">Total Costs</div>
+                    <div class="fin-kpi-value" id="rep-costs">$0</div>
+                    <div class="fin-kpi-sub">Ops + COGS + Ad Spend</div>
+                </div>
+                <div class="fin-kpi-card profit">
+                    <div class="fin-kpi-label">Net Profit</div>
+                    <div class="fin-kpi-value" id="rep-profit">$0</div>
+                    <div class="fin-kpi-sub">Revenue − Total Costs</div>
+                </div>
+                <div class="fin-kpi-card roi">
+                    <div class="fin-kpi-label">Profit Margin</div>
+                    <div class="fin-kpi-value" id="rep-margin">N/A</div>
+                    <div class="fin-kpi-sub">Net / Gross Revenue</div>
+                </div>
+                <div class="fin-kpi-card roi">
+                    <div class="fin-kpi-label">ROI</div>
+                    <div class="fin-kpi-value" id="rep-roi">N/A</div>
+                    <div class="fin-kpi-sub">(Profit / Total Costs)</div>
+                </div>
+                <div class="fin-kpi-card cpa">
+                    <div class="fin-kpi-label">CPA</div>
+                    <div class="fin-kpi-value" id="rep-cpa">N/A</div>
+                    <div class="fin-kpi-sub">Ad spend / leads</div>
+                </div>
+                <div class="fin-kpi-card leads">
+                    <div class="fin-kpi-label">Leads Converted</div>
+                    <div class="fin-kpi-value" id="rep-leads">0</div>
+                    <div class="fin-kpi-sub">Rentals + product sales</div>
+                </div>
+                <div class="fin-kpi-card leads">
+                    <div class="fin-kpi-label">Avg Order Value</div>
+                    <div class="fin-kpi-value" id="rep-aov">N/A</div>
+                    <div class="fin-kpi-sub">Revenue / leads</div>
+                </div>
+            </div>
+
+            <!-- P&L + Chart row -->
+            <div class="fin-grid-2">
+
+                <!-- P&L Breakdown -->
+                <div class="fin-panel">
+                    <h3><i class="fa fa-file-text-o"></i> P&amp;L Statement</h3>
+                    <div id="pnl-body"></div>
+                </div>
+
+                <!-- Revenue vs Cost Chart -->
+                <div class="fin-panel">
+                    <h3><i class="fa fa-bar-chart"></i> Daily Revenue vs. Costs</h3>
+                    <div class="fin-chart-legend">
+                        <div class="fin-legend-item"><div class="fin-legend-dot" style="background:#000000;"></div>Revenue</div>
+                        <div class="fin-legend-item"><div class="fin-legend-dot" style="background:#f59e0b;"></div>Costs</div>
+                        <div class="fin-legend-item"><div class="fin-legend-dot" style="background:#16a34a;"></div>Net Profit</div>
+                    </div>
+                    <div class="fin-chart" id="fin-chart"></div>
+                </div>
+
+            </div>
+
+            <!-- Source breakdown -->
+            <div class="fin-panel">
+                <h3><i class="fa fa-pie-chart"></i> Revenue by Acquisition Source</h3>
+                <div id="source-breakdown"></div>
+            </div>
+
+        </div>
+        <!-- /Tab: P&L Reports -->
+
+    </div>
+
+</div>
+
+<!-- Reservation Detail Modal -->
+<div class="admin-modal-overlay" id="res-detail-overlay" style="display:none">
+    <div class="admin-modal-box">
+        <div class="admin-modal-header">
+            <h3>Reservation Details</h3>
+            <button id="close-res-modal"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="admin-modal-body">
+            <div class="modal-detail-grid" id="modal-detail-grid"></div>
+        </div>
+        <div class="admin-modal-footer">
+            <button class="btn-admin-cancel-res" id="modal-btn-cancel">Cancel Reservation</button>
+            <button class="btn-admin-close" id="modal-btn-close">Close</button>
+        </div>
+    </div>
+</div>
+
+<!-- Confirm Dialog -->
+<div class="admin-confirm-overlay" id="admin-confirm-overlay" style="display:none">
+    <div class="admin-confirm-box">
+        <h4 id="confirm-title">Are you sure?</h4>
+        <p id="confirm-msg">This action cannot be undone.</p>
+        <div class="confirm-btns">
+            <button id="confirm-cancel-btn">Cancel</button>
+            <button class="btn-danger" id="confirm-ok-btn">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Toast -->
+<div class="admin-toast" id="admin-toast"></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="js/rental-data.js"></script>
+<script src="js/admin-marketing.js"></script>
+<script src="js/fin-store.js"></script>
+<script src="js/admin-reports.js"></script>
+<script>
+(function () {
+    'use strict';
+
+    /* â”€â”€ Normalize reservation â€” handles both Stripe and direct booking structures â”€â”€ */
+    function norm(r) {
+        const stripe = !!r.guest;
+        return {
+            name:         stripe ? (r.guest.name  || 'â€”') : (r.name  || 'â€”'),
+            email:        stripe ? (r.guest.email || 'â€”') : (r.email || 'â€”'),
+            phone:        stripe ? (r.guest.phone || 'â€”') : (r.phone || 'â€”'),
+            notes:        stripe ? (r.guest.notes || '')  : (r.notes || ''),
+            nights:       stripe ? (r.price?.nights   || 0) : (r.nights       || 0),
+            total:        stripe ? (r.price?.total    || 0) : (r.total        || 0),
+            pricePerNight:stripe ? (r.price?.pricePerNight || 0) : (r.pricePerNight || 0),
+            subtotal:     stripe ? (r.price?.base    || 0) : ((r.nights || 0) * (r.pricePerNight || 0)),
+            cleaningFee:  stripe ? (r.price?.clean   || 0) : (r.cleaningFee  || 0),
+            serviceFee:   stripe ? (r.price?.svc     || 0) : (r.serviceFee   || 0),
+            taxes:        stripe ? (r.price?.taxes   || 0) : (r.taxes        || 0),
+        };
+    }
+
+    /* â”€â”€ Tabs â”€â”€ */
+    document.querySelectorAll('.admin-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.admin-tab').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.admin-tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    /* â”€â”€ Toast â”€â”€ */
+    function toast(msg, type = 'info') {
+        const el = document.getElementById('admin-toast');
+        el.textContent = msg;
+        el.className = 'admin-toast show ' + type;
+        setTimeout(() => el.classList.remove('show'), 3000);
+    }
+
+    /* â”€â”€ Stats â”€â”€ */
+    function renderStats() {
+        const all = RentalStore.getReservations();
+        const confirmed = all.filter(r => r.status === 'confirmed');
+        const revenue = confirmed.reduce((s, r) => s + norm(r).total, 0);
+        const nights  = confirmed.reduce((s, r) => s + norm(r).nights, 0);
+        document.getElementById('stat-total').textContent = all.length;
+        document.getElementById('stat-confirmed').textContent = confirmed.length;
+        document.getElementById('stat-revenue').textContent = RentalUtils.formatMoney(revenue);
+        document.getElementById('stat-nights').textContent = nights;
+    }
+
+    /* â”€â”€ Reservations Table â”€â”€ */
+    function renderTable() {
+        const search = (document.getElementById('res-search').value || '').toLowerCase();
+        const status = document.getElementById('res-filter-status').value;
+        let rows = RentalStore.getReservations();
+
+        if (status) rows = rows.filter(r => r.status === status);
+        if (search) rows = rows.filter(r => {
+            const n = norm(r);
+            return [n.name, n.email, r.id].join(' ').toLowerCase().includes(search);
+        });
+
+        const tbody = document.getElementById('reservations-body');
+        const empty = document.getElementById('res-empty');
+
+        if (rows.length === 0) {
+            tbody.innerHTML = '';
+            empty.style.display = 'flex';
+            return;
+        }
+        empty.style.display = 'none';
+
+        tbody.innerHTML = rows.map(r => {
+            const n = norm(r);
+            const badge = r.status === 'confirmed'
+                ? '<span class="res-badge badge-confirmed">Confirmed</span>'
+                : '<span class="res-badge badge-cancelled">Cancelled</span>';
+            return `<tr class="${r.status === 'cancelled' ? 'row-cancelled' : ''}">
+                <td><code>${r.id}</code></td>
+                <td>
+                    <strong>${n.name}</strong><br/>
+                    <span style="font-size:12px;color:#717171;">${n.email}</span>
+                </td>
+                <td>${r.checkIn || 'â€”'}</td>
+                <td>${r.checkOut || 'â€”'}</td>
+                <td>${n.nights || 'â€”'}</td>
+                <td>${r.guests || 'â€”'}</td>
+                <td>${RentalUtils.formatMoney(n.total)}</td>
+                <td>${badge}</td>
+                <td>
+                    <button class="btn-view-res" title="View" data-id="${r.id}"><i class="fa fa-eye"></i></button>
+                    ${r.status === 'confirmed' ? `<button class="btn-cancel-res" title="Cancel" data-id="${r.id}"><i class="fa fa-ban"></i></button>` : ''}
+                    <button class="btn-delete-res" title="Delete" data-id="${r.id}"><i class="fa fa-trash"></i></button>
+                </td>
+            </tr>`;
+        }).join('');
+
+        tbody.querySelectorAll('.btn-view-res').forEach(btn => {
+            btn.addEventListener('click', () => openDetailModal(btn.dataset.id));
+        });
+        tbody.querySelectorAll('.btn-cancel-res').forEach(btn => {
+            btn.addEventListener('click', () => confirmAction(
+                'Cancel reservation?',
+                'The guest will not be automatically notified.',
+                () => { RentalStore.updateReservation(btn.dataset.id, { status: 'cancelled' }); refresh(); toast('Reservation cancelled', 'info'); }
+            ));
+        });
+        tbody.querySelectorAll('.btn-delete-res').forEach(btn => {
+            btn.addEventListener('click', () => confirmAction(
+                'Delete reservation?',
+                'This will permanently remove the record.',
+                () => { RentalStore.deleteReservation(btn.dataset.id); refresh(); toast('Reservation deleted', 'error'); }
+            ));
+        });
+    }
+
+    /* â”€â”€ Detail Modal â”€â”€ */
+    function openDetailModal(id) {
+        const r = RentalStore.getReservations().find(x => x.id === id);
+        if (!r) return;
+        const n = norm(r);
+        const detailRows = [
+            ['Booking ID', `<code>${r.id}</code>`],
+            ['Status', r.status.charAt(0).toUpperCase() + r.status.slice(1)],
+            ['Guest', n.name],
+            ['Email', n.email],
+            ['Phone', n.phone],
+            ['Check-in', r.checkIn || 'â€”'],
+            ['Check-out', r.checkOut || 'â€”'],
+            ['Nights', n.nights || 'â€”'],
+            ['Guests', r.guests || 'â€”'],
+            ['Nightly rate', RentalUtils.formatMoney(n.pricePerNight)],
+            ['Subtotal', RentalUtils.formatMoney(n.subtotal)],
+            ['Cleaning fee', RentalUtils.formatMoney(n.cleaningFee)],
+            ['Service fee', RentalUtils.formatMoney(n.serviceFee)],
+            ['Taxes', RentalUtils.formatMoney(n.taxes)],
+            ['Total', RentalUtils.formatMoney(n.total)],
+        ];
+        if (n.notes) detailRows.push(['Message', n.notes]);
+
+        document.getElementById('modal-detail-grid').innerHTML = detailRows.map(([l, v]) =>
+            `<div class="mdg-row${l === 'Total' ? ' total' : ''}"><span>${l}</span><span>${v}</span></div>`
+        ).join('');
+
+        const cancelBtn = document.getElementById('modal-btn-cancel');
+        cancelBtn.style.display = r.status === 'confirmed' ? '' : 'none';
+        cancelBtn.onclick = () => confirmAction(
+            'Cancel reservation?', 'The guest will not be notified automatically.',
+            () => { RentalStore.updateReservation(id, { status: 'cancelled' }); closeDetailModal(); refresh(); toast('Cancelled', 'info'); }
+        );
+
+        document.getElementById('res-detail-overlay').style.display = 'flex';
+    }
+    function closeDetailModal() { document.getElementById('res-detail-overlay').style.display = 'none'; }
+    document.getElementById('close-res-modal').addEventListener('click', closeDetailModal);
+    document.getElementById('modal-btn-close').addEventListener('click', closeDetailModal);
+    document.getElementById('res-detail-overlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeDetailModal(); });
+
+    /* â”€â”€ Confirm Dialog â”€â”€ */
+    let pendingConfirmOk = null;
+    function confirmAction(title, msg, onOk) {
+        document.getElementById('confirm-title').textContent = title;
+        document.getElementById('confirm-msg').textContent = msg;
+        pendingConfirmOk = onOk;
+        document.getElementById('admin-confirm-overlay').style.display = 'flex';
+    }
+    document.getElementById('confirm-ok-btn').addEventListener('click', () => {
+        document.getElementById('admin-confirm-overlay').style.display = 'none';
+        if (pendingConfirmOk) pendingConfirmOk();
+        pendingConfirmOk = null;
+    });
+    document.getElementById('confirm-cancel-btn').addEventListener('click', () => {
+        document.getElementById('admin-confirm-overlay').style.display = 'none';
+        pendingConfirmOk = null;
+    });
+
+    /* â”€â”€ Search / filter â”€â”€ */
+    document.getElementById('res-search').addEventListener('input', renderTable);
+    document.getElementById('res-filter-status').addEventListener('change', renderTable);
+
+    /* â”€â”€ Pricing â”€â”€ */
+    function updatePricingPreview() {
+        const night   = parseFloat(document.getElementById('price-night').value)    || 185;
+        const cleaning= parseFloat(document.getElementById('price-cleaning').value) || 75;
+        const svcPct  = parseFloat(document.getElementById('price-service').value)  || 14;
+        const nights  = 3;
+        const subtotal = night * nights;
+        const service  = Math.round(subtotal * svcPct / 100);
+        const tax      = Math.round((subtotal + cleaning + service) * 0.115);
+        const total    = subtotal + cleaning + service + tax;
+        document.getElementById('prev-nights-label').textContent = `$${night} × ${nights} nights`;
+        document.getElementById('prev-nights-val').textContent   = `$${subtotal.toLocaleString()}`;
+        document.getElementById('prev-cleaning-val').textContent = `$${cleaning}`;
+        document.getElementById('prev-service-val').textContent  = `$${service.toLocaleString()}`;
+        document.getElementById('prev-tax-val').textContent      = `$${tax.toLocaleString()}`;
+        document.getElementById('prev-total-val').textContent    = `$${total.toLocaleString()}`;
+    }
+    ['price-night', 'price-cleaning', 'price-service'].forEach(id => {
+        document.getElementById(id).addEventListener('input', updatePricingPreview);
+    });
+    document.getElementById('btn-save-price').addEventListener('click', () => {
+        const night = parseFloat(document.getElementById('price-night').value) || 185;
+        RentalStore.setPrice(night);
+        document.getElementById('price-saved-note').style.display = 'flex';
+        setTimeout(() => document.getElementById('price-saved-note').style.display = 'none', 3000);
+        toast('Pricing saved!', 'success');
+    });
+
+    /* Load saved pricing â€” getCurrentPrice() returns a number */
+    const savedNight = RentalStore.getCurrentPrice();
+    document.getElementById('price-night').value = savedNight || 185;
+    updatePricingPreview();
+
+    /* â”€â”€ Blocked Dates â”€â”€ */
+    let blockedDates = RentalStore.getBlockedDates();
+
+    const blockedCal = flatpickr('#blocked-calendar', {
+        inline: true,
+        mode: 'multiple',
+        dateFormat: 'Y-m-d',
+        defaultDate: blockedDates,
+        minDate: 'today',
+        onChange(selected) {
+            blockedDates = selected.map(d => d.toISOString().split('T')[0]);
+            RentalStore.setBlockedDates(blockedDates);
+            renderBlockedList();
+        }
+    });
+
+    function renderBlockedList() {
+        const count = blockedDates.length;
+        document.getElementById('blocked-count').textContent = count;
+        const tags = document.getElementById('blocked-tags');
+        const empty = document.getElementById('blocked-empty');
+        const actions = document.getElementById('blocked-actions');
+
+        if (count === 0) {
+            tags.innerHTML = '';
+            empty.style.display = 'block';
+            actions.style.display = 'none';
+            return;
+        }
+        empty.style.display = 'none';
+        actions.style.display = 'block';
+
+        tags.innerHTML = [...blockedDates].sort().map(d =>
+            `<span class="blocked-tag">${d} <button data-date="${d}" title="Unblock">&times;</button></span>`
+        ).join('');
+
+        tags.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                blockedDates = blockedDates.filter(d => d !== btn.dataset.date);
+                RentalStore.setBlockedDates(blockedDates);
+                blockedCal.setDate(blockedDates, false);
+                renderBlockedList();
+            });
+        });
+    }
+
+    document.getElementById('btn-clear-blocked').addEventListener('click', () => {
+        confirmAction('Clear all blocked dates?', 'All blocked dates will be removed.',
+            () => {
+                blockedDates = [];
+                RentalStore.setBlockedDates([]);
+                blockedCal.clear();
+                renderBlockedList();
+                toast('Cleared all blocked dates', 'info');
+            });
+    });
+
+    renderBlockedList();
+
+    /* â”€â”€ Full refresh â”€â”€ */
+    function refresh() {
+        renderStats();
+        renderTable();
+    }
+
+    refresh();
+
+})();
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Booking Confirmed â€” BoxRetreat</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+
+    <link rel="icon" type="image/ico" href="favicon.ico" />
+    <link href="style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Typography system: premium serials (local @font-face via typography.css) +
+         open-source CDN fallbacks (Cormorant Garamond, DM Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" />
+    <link href="css/rental.css" rel="stylesheet" />
+
+    <style>
+        .success-wrap {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            background: #f4f5f7;
+        }
+        .success-card {
+            background: #fff;
+            border-radius: 20px;
+            max-width: 540px;
+            width: 100%;
+            padding: 48px 40px;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.10);
+        }
+        .success-icon {
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: #f0fdf4;
+            border: 3px solid #22c55e;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        .success-icon i { font-size: 36px; color: #22c55e; }
+        .success-card h1 {
+            font-family: 'Futura','Century Gothic','Josefin Sans',sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: #0A0A0A;
+            margin: 0 0 10px;
+        }
+        .success-card p {
+            font-size: 15px;
+            color: #555;
+            margin: 0 0 28px;
+            line-height: 1.6;
+        }
+        .booking-id-badge {
+            background: #f5f5f5;
+            border-radius: 10px;
+            padding: 14px 24px;
+            margin: 0 0 28px;
+            font-weight: 900;
+            font-size: 22px;
+            color: #222;
+            letter-spacing: 2px;
+        }
+        .confirm-detail-grid {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 28px;
+            text-align: left;
+        }
+        .cdg-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #222;
+            padding: 7px 0;
+            border-bottom: 1px solid #ebebeb;
+        }
+        .cdg-row:last-child { border-bottom: none; font-weight: 700; font-size: 15px; }
+        .cdg-row span:first-child { color: #717171; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+        .btn-success-primary {
+            background: #0A0A0A;
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 13px 28px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Futura','Century Gothic','Josefin Sans',sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .btn-success-secondary {
+            background: #fff;
+            color: #222;
+            border: 1.5px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 13px 28px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Roboto', sans-serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .error-icon { color: #dc2626; background: #fef2f2; border-color: #fecaca; }
+        .error-icon i { color: #dc2626; }
+        .verifying { color: #717171; font-size: 14px; }
+        .verifying i { animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .logo-bar {
+            text-align: center;
+            padding: 32px 24px 0;
+            font-family: 'Futura','Century Gothic','Josefin Sans',sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: #0A0A0A;
+        }
+    </style>
+</head>
+
+<body style="background:#f4f5f7;margin:0;padding:0;">
+
+<div class="logo-bar">
+    Box<span style="color:#000000;">Retreat</span>
+</div>
+
+<div class="success-wrap">
+    <div class="success-card" id="success-card">
+
+        <!-- Verifying state -->
+        <div id="state-verifying">
+            <p class="verifying"><i class="fa fa-circle-o-notch"></i> Verifying your paymentâ€¦</p>
+        </div>
+
+        <!-- Success state (hidden initially) -->
+        <div id="state-success" style="display:none">
+            <div class="success-icon"><i class="fa fa-check"></i></div>
+            <h1>Booking Confirmed!</h1>
+            <p>Your stay at BoxRetreat is confirmed. A confirmation email has been sent to <strong id="confirm-email">your email</strong>.</p>
+            <div class="booking-id-badge" id="confirm-booking-id">BR-000000</div>
+            <div class="confirm-detail-grid" id="confirm-grid"></div>
+            <div class="success-actions">
+                <a href="rental.html" class="btn-success-primary"><i class="fa fa-home"></i> View Property</a>
+                <button class="btn-success-secondary" onclick="window.print()"><i class="fa fa-print"></i> Print Confirmation</button>
+            </div>
+        </div>
+
+        <!-- Error state (hidden initially) -->
+        <div id="state-error" style="display:none">
+            <div class="success-icon error-icon"><i class="fa fa-times"></i></div>
+            <h1 style="color:#dc2626;">Payment Cancelled</h1>
+            <p id="error-msg">Your payment was not completed. No charges were made.</p>
+            <div class="success-actions">
+                <a href="rental.html" class="btn-success-primary"><i class="fa fa-arrow-left"></i> Back to Property</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="js/rental-data.js"></script>
+<script>
+(function () {
+    const params = new URLSearchParams(window.location.search);
+
+    function showState(id) {
+        ['state-verifying', 'state-success', 'state-error'].forEach(s => {
+            document.getElementById(s).style.display = s === id ? 'block' : 'none';
+        });
+    }
+
+    function renderSuccess(res) {
+        const g = res.guest || {};
+        document.getElementById('confirm-email').textContent = g.email || 'your email';
+        document.getElementById('confirm-booking-id').textContent = res.id;
+
+        const rows = [
+            ['Property', 'BoxRetreat â€” Luquillo, Puerto Rico'],
+            ['Check-in', res.checkIn || 'â€”'],
+            ['Check-out', res.checkOut || 'â€”'],
+            ['Nights', res.nights || 'â€”'],
+            ['Guests', (res.guests || 1) + ' guest' + ((res.guests || 1) > 1 ? 's' : '')],
+            ['Total paid', '$' + RentalUtils.formatMoney(res.price?.total || 0)],
+        ];
+        document.getElementById('confirm-grid').innerHTML = rows.map(([l, v]) =>
+            `<div class="cdg-row"><span>${l}</span><span>${v}</span></div>`
+        ).join('');
+
+        showState('state-success');
+    }
+
+    /* â”€â”€ Cancelled flow â”€â”€ */
+    if (params.get('cancelled') === '1') {
+        showState('state-error');
+        return;
+    }
+
+    /* â”€â”€ Success flow â”€â”€ */
+    const sessionId = params.get('session_id');
+
+    if (!sessionId) {
+        /* No session_id â€” look for pending reservation saved before redirect */
+        const pending = localStorage.getItem('br_pending_reservation');
+        if (pending) {
+            try {
+                const res = JSON.parse(pending);
+                res.status = 'confirmed';
+                RentalStore.addReservation(res);
+                localStorage.removeItem('br_pending_reservation');
+                renderSuccess(res);
+            } catch (e) {
+                showState('state-error');
+                document.getElementById('error-msg').textContent = 'Could not load booking details. Please contact us.';
+            }
+        } else {
+            showState('state-error');
+            document.getElementById('error-msg').textContent = 'No booking information found.';
+        }
+        return;
+    }
+
+    /* â”€â”€ Verify with server â”€â”€ */
+    fetch('/api/session/' + sessionId)
+        .then(r => r.json())
+        .then(data => {
+            if (data.error) throw new Error(data.error);
+
+            /* Try to recover pending reservation */
+            const pending = localStorage.getItem('br_pending_reservation');
+            let res;
+            if (pending) {
+                res = JSON.parse(pending);
+                res.status = 'confirmed';
+                res.stripeSessionId = sessionId;
+            } else {
+                /* Construct minimal record from Stripe metadata */
+                const m = data.metadata || {};
+                res = {
+                    id: m.bookingId || RentalUtils.genId(),
+                    checkIn: m.checkIn,
+                    checkOut: m.checkOut,
+                    nights: parseInt(m.nights, 10),
+                    guests: parseInt(m.guests, 10),
+                    guest: { email: data.customer_email || '', firstName: m.guestName || '' },
+                    price: { total: (data.amount_total || 0) / 100 },
+                    status: 'confirmed',
+                    stripeSessionId: sessionId,
+                };
+            }
+
+            RentalStore.addReservation(res);
+            localStorage.removeItem('br_pending_reservation');
+            renderSuccess(res);
+        })
+        .catch(() => {
+            /* Server unreachable â€” fall back to pending reservation */
+            const pending = localStorage.getItem('br_pending_reservation');
+            if (pending) {
+                try {
+                    const res = JSON.parse(pending);
+                    res.status = 'confirmed';
+                    res.stripeSessionId = sessionId;
+                    RentalStore.addReservation(res);
+                    localStorage.removeItem('br_pending_reservation');
+                    renderSuccess(res);
+                } catch (e) {
+                    showState('state-error');
+                }
+            } else {
+                showState('state-error');
+                document.getElementById('error-msg').textContent = 'Could not verify payment. Please contact us with your booking reference.';
+            }
+        });
+})();
+</script>
+
+</body>
+</html>
+

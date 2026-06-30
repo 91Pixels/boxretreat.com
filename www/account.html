@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BoxRetreat â€” My Account</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/ico" href="favicon.ico" />
+    <link href="style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Typography system: premium serials (local @font-face via typography.css) +
+         open-source CDN fallbacks (Cormorant Garamond, DM Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" />
+    <link href="css/rental.css" rel="stylesheet" />
+</head>
+
+<body class="hidden">
+<main>
+<div class="cd-index cd-main-content">
+<div id="page-content" class="rental-page" data-bgcolor="#f4f5f7" data-textcolor="#000">
+
+    <div class="page-overlay from-bottom">
+        <div class="animate-box-bottom"></div>
+        <div class="animate-box-left"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="scroll-hide">
+        <div id="header-container">
+            <div id="logo">
+                <a href="rental.html">
+                    <span style="font-family:'Futura','Century Gothic','Josefin Sans',sans-serif;font-weight:700;font-size:18px;color:#0A0A0A;letter-spacing:-0.5px;">Box<span style="color:#000000;">Retreat</span></span>
+                </a>
+            </div>
+            <nav>
+                <ul data-breakpoint="1024" class="flexnav">
+                    <li><a href="rental.html">Property</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a class="active" href="account.html">Account</a></li>
+                    <li><a href="admin.html">Owner</a></li>
+                </ul>
+            </nav>
+            <div id="menu-burger"><span></span><span></span><span></span><span></span></div>
+        </div>
+    </header>
+
+    <div id="main">
+    <div id="main-content">
+
+    <!-- â•â• AUTH PANEL (shown when logged out) â•â• -->
+    <section id="auth-panel" class="acct-auth-panel" style="display:none">
+        <div class="acct-auth-wrap">
+            <div class="acct-auth-card">
+                <div class="acct-auth-logo">
+                    <span style="font-family:'Futura','Century Gothic','Josefin Sans',sans-serif;font-weight:700;font-size:22px;">Box<span style="color:#000000;">Retreat</span></span>
+                </div>
+
+                <!-- Tabs -->
+                <div class="acct-tabs">
+                    <button class="acct-tab active" data-tab="login">Log in</button>
+                    <button class="acct-tab" data-tab="signup">Sign up</button>
+                </div>
+
+                <!-- Login form -->
+                <div id="auth-login" class="acct-form-panel active">
+                    <div class="acct-field">
+                        <label>Email</label>
+                        <input id="login-email" type="email" placeholder="you@example.com" autocomplete="email" />
+                    </div>
+                    <div class="acct-field">
+                        <label>Password</label>
+                        <input id="login-password" type="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" autocomplete="current-password" />
+                    </div>
+                    <button id="login-btn" class="acct-submit-btn">Log in</button>
+                    <button id="forgot-btn" class="acct-text-btn">Forgot password?</button>
+                    <div id="login-error" class="acct-error" style="display:none"></div>
+                </div>
+
+                <!-- Sign up form -->
+                <div id="auth-signup" class="acct-form-panel">
+                    <div class="acct-field">
+                        <label>Full name</label>
+                        <input id="signup-name" type="text" placeholder="Your name" autocomplete="name" />
+                    </div>
+                    <div class="acct-field">
+                        <label>Email</label>
+                        <input id="signup-email" type="email" placeholder="you@example.com" autocomplete="email" />
+                    </div>
+                    <div class="acct-field">
+                        <label>Password</label>
+                        <input id="signup-password" type="password" placeholder="At least 8 characters" autocomplete="new-password" />
+                    </div>
+                    <button id="signup-btn" class="acct-submit-btn">Create account</button>
+                    <div id="signup-error" class="acct-error" style="display:none"></div>
+                    <div id="signup-success" class="acct-success" style="display:none">
+                        <i class="fa fa-check-circle"></i> Check your email to confirm your account.
+                    </div>
+                </div>
+
+                <!-- Supabase notice -->
+                <p class="acct-note">Powered by Supabase Â· Your data is secure</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- â•â• DASHBOARD (shown when logged in) â•â• -->
+    <section id="dashboard-panel" class="acct-dashboard" style="display:none">
+        <div class="rental-wrap">
+
+            <!-- Profile bar -->
+            <div class="acct-profile-bar">
+                <div class="acct-avatar" id="acct-avatar-initials">M</div>
+                <div>
+                    <h2 id="acct-display-name">Guest</h2>
+                    <p id="acct-display-email" style="color:#717171;font-size:14px;"></p>
+                </div>
+                <button id="signout-btn" class="acct-signout-btn"><i class="fa fa-sign-out"></i> Sign out</button>
+            </div>
+
+            <!-- Dashboard tabs -->
+            <div class="acct-dash-tabs">
+                <button class="acct-dash-tab active" data-tab="stays">
+                    <i class="fa fa-home"></i> My Stays
+                </button>
+                <button class="acct-dash-tab" data-tab="equipment">
+                    <i class="fa fa-shopping-bag"></i> Equipment Orders
+                </button>
+                <button class="acct-dash-tab" data-tab="profile">
+                    <i class="fa fa-user"></i> Profile
+                </button>
+            </div>
+
+            <!-- My Stays -->
+            <div id="dash-stays" class="acct-dash-panel active">
+                <div id="stays-list" class="acct-stays-list"></div>
+                <div id="stays-empty" class="acct-empty" style="display:none">
+                    <i class="fa fa-calendar-o"></i>
+                    <h3>No reservations yet</h3>
+                    <p>Your upcoming and past stays will appear here.</p>
+                    <a href="rental.html" class="acct-cta-btn">Book a stay</a>
+                </div>
+            </div>
+
+            <!-- Equipment Orders -->
+            <div id="dash-equipment" class="acct-dash-panel">
+                <div id="orders-list" class="acct-orders-list"></div>
+                <div id="orders-empty" class="acct-empty" style="display:none">
+                    <i class="fa fa-shopping-bag"></i>
+                    <h3>No equipment orders yet</h3>
+                    <p>Rent surfboards, snorkel gear, and more.</p>
+                    <a href="shop.html" class="acct-cta-btn">Browse equipment</a>
+                </div>
+            </div>
+
+            <!-- Profile settings -->
+            <div id="dash-profile" class="acct-dash-panel">
+                <div class="acct-profile-form">
+                    <h3>Profile settings</h3>
+                    <div class="acct-field">
+                        <label>Full name</label>
+                        <input id="profile-name" type="text" />
+                    </div>
+                    <div class="acct-field">
+                        <label>Email <span style="color:#999;font-size:12px;">(cannot change)</span></label>
+                        <input id="profile-email" type="email" disabled />
+                    </div>
+                    <div class="acct-field">
+                        <label>New password <span style="color:#999;font-size:12px;">(leave blank to keep current)</span></label>
+                        <input id="profile-password" type="password" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" />
+                    </div>
+                    <button id="profile-save-btn" class="acct-submit-btn" style="max-width:200px">Save changes</button>
+                    <div id="profile-msg" style="display:none;margin-top:12px;"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="rental-footer" style="margin-top:auto">
+        <div class="rental-wrap">
+            <div class="rf-inner">
+                <span style="font-family:'Futura','Century Gothic','Josefin Sans',sans-serif;font-weight:700;color:#0A0A0A;">Box<span style="color:#000000;">Retreat</span></span>
+                <span class="rf-copy">Â© 2026 BoxRetreat Â· Luquillo, Puerto Rico</span>
+                <div class="rf-links">
+                    <a href="rental.html">Property</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="account.html">Account</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </div><!-- /main-content -->
+    </div><!-- /main -->
+</div>
+</div>
+</main>
+
+<!-- Toast -->
+<div id="acct-toast" class="shop-toast"></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/scripts.js"></script>
+<!-- Supabase JS v2 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/rental-data.js"></script>
+<script src="js/config.js"></script>
+<script src="js/auth.js"></script>
+<script>
+(function () {
+    'use strict';
+
+    const $ = id => document.getElementById(id);
+    const fmt = n => '$' + Math.round(n).toLocaleString('en-US');
+
+    /* â”€â”€ Show/hide panels â”€â”€ */
+    function showAuth() {
+        $('auth-panel').style.display = 'block';
+        $('dashboard-panel').style.display = 'none';
+    }
+    function showDashboard(user) {
+        $('auth-panel').style.display = 'none';
+        $('dashboard-panel').style.display = 'block';
+        const name = user.user_metadata?.full_name || user.email.split('@')[0];
+        $('acct-display-name').textContent = name;
+        $('acct-display-email').textContent = user.email;
+        $('acct-avatar-initials').textContent = name.charAt(0).toUpperCase();
+        $('profile-name').value = name;
+        $('profile-email').value = user.email;
+        loadStays(user);
+        loadOrders(user);
+    }
+
+    /* â”€â”€ Auth tabs â”€â”€ */
+    document.querySelectorAll('.acct-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.acct-tab').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.acct-form-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            $('auth-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    /* â”€â”€ Dashboard tabs â”€â”€ */
+    document.querySelectorAll('.acct-dash-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.acct-dash-tab').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.acct-dash-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            $('dash-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    /* â”€â”€ Login â”€â”€ */
+    $('login-btn').addEventListener('click', async () => {
+        const email = $('login-email').value.trim();
+        const password = $('login-password').value;
+        const errEl = $('login-error');
+        errEl.style.display = 'none';
+        $('login-btn').textContent = 'Logging inâ€¦';
+        $('login-btn').disabled = true;
+        try {
+            const { user } = await Auth.signIn(email, password);
+            showDashboard(user || (await Auth.getUser()));
+        } catch (err) {
+            errEl.textContent = err.message;
+            errEl.style.display = 'block';
+        } finally {
+            $('login-btn').textContent = 'Log in';
+            $('login-btn').disabled = false;
+        }
+    });
+
+    /* â”€â”€ Sign up â”€â”€ */
+    $('signup-btn').addEventListener('click', async () => {
+        const name = $('signup-name').value.trim();
+        const email = $('signup-email').value.trim();
+        const password = $('signup-password').value;
+        const errEl = $('signup-error');
+        errEl.style.display = 'none';
+        $('signup-success').style.display = 'none';
+        if (!name || !email || password.length < 8) {
+            errEl.textContent = 'Please fill all fields (password min 8 chars)';
+            errEl.style.display = 'block'; return;
+        }
+        $('signup-btn').textContent = 'Creating accountâ€¦';
+        $('signup-btn').disabled = true;
+        try {
+            await Auth.signUp(email, password, name);
+            $('signup-success').style.display = 'block';
+        } catch (err) {
+            errEl.textContent = err.message;
+            errEl.style.display = 'block';
+        } finally {
+            $('signup-btn').textContent = 'Create account';
+            $('signup-btn').disabled = false;
+        }
+    });
+
+    /* â”€â”€ Forgot password â”€â”€ */
+    $('forgot-btn').addEventListener('click', async () => {
+        const email = $('login-email').value.trim();
+        if (!email) { alert('Enter your email first'); return; }
+        try {
+            await Auth.resetPassword(email);
+            alert('Password reset email sent. Check your inbox.');
+        } catch (err) { alert(err.message); }
+    });
+
+    /* â”€â”€ Sign out â”€â”€ */
+    $('signout-btn').addEventListener('click', () => Auth.signOut());
+
+    /* â”€â”€ Profile save â”€â”€ */
+    $('profile-save-btn').addEventListener('click', async () => {
+        const msg = $('profile-msg');
+        msg.style.display = 'none';
+        try {
+            const sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+            const updates = { data: { full_name: $('profile-name').value.trim() } };
+            const pw = $('profile-password').value;
+            if (pw) updates.password = pw;
+            const { error } = await sb.auth.updateUser(updates);
+            if (error) throw error;
+            msg.textContent = 'âœ“ Saved';
+            msg.style.color = '#22c55e';
+            msg.style.display = 'block';
+        } catch (err) {
+            msg.textContent = err.message;
+            msg.style.color = '#dc2626';
+            msg.style.display = 'block';
+        }
+    });
+
+    /* â”€â”€ Load stays â”€â”€ */
+    async function loadStays(user) {
+        const stays = await Auth.getMyReservations();
+        const list = $('stays-list');
+        const empty = $('stays-empty');
+        if (stays.length === 0) {
+            list.innerHTML = '';
+            empty.style.display = 'flex';
+            return;
+        }
+        empty.style.display = 'none';
+        const today = new Date().toISOString().split('T')[0];
+        list.innerHTML = stays.map(r => {
+            const isUpcoming = r.checkIn >= today;
+            const nights = r.price?.nights || r.nights || 'â€”';
+            const total = r.price?.total || r.total || 0;
+            const statusLabel = r.status === 'confirmed' ? 'Confirmed' : 'Cancelled';
+            const statusClass = r.status === 'confirmed' ? 'badge-confirmed' : 'badge-cancelled';
+            return `
+            <div class="acct-stay-card ${r.status === 'cancelled' ? 'cancelled' : ''}">
+                <div class="asc-img">
+                    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=300&h=200&fit=crop" alt="BoxRetreat" />
+                    ${isUpcoming ? '<span class="asc-upcoming">Upcoming</span>' : ''}
+                </div>
+                <div class="asc-body">
+                    <h4>BoxRetreat â€” Luquillo, PR</h4>
+                    <div class="asc-dates">
+                        <span><i class="fa fa-sign-in"></i> ${r.checkIn}</span>
+                        <span class="asc-arrow">â†’</span>
+                        <span><i class="fa fa-sign-out"></i> ${r.checkOut}</span>
+                    </div>
+                    <div class="asc-meta">
+                        <span>${nights} night${nights !== 1 ? 's' : ''}</span>
+                        <span>Â·</span>
+                        <span>${r.guests || 1} guest${r.guests > 1 ? 's' : ''}</span>
+                        <span>Â·</span>
+                        <span class="res-badge ${statusClass}">${statusLabel}</span>
+                    </div>
+                    <div class="asc-total">${fmt(total)} total</div>
+                    <code style="font-size:11px;color:#999;">${r.id}</code>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    /* â”€â”€ Load orders â”€â”€ */
+    async function loadOrders(user) {
+        const orders = await Auth.getMyOrders();
+        const list = $('orders-list');
+        const empty = $('orders-empty');
+        if (orders.length === 0) {
+            list.innerHTML = '';
+            empty.style.display = 'flex';
+            return;
+        }
+        empty.style.display = 'none';
+        list.innerHTML = orders.map(o => `
+            <div class="acct-order-card">
+                <div class="aoc-header">
+                    <span><i class="fa fa-shopping-bag"></i> Equipment Order</span>
+                    <span class="res-badge badge-confirmed">${o.status || 'Confirmed'}</span>
+                </div>
+                <div class="aoc-dates">${o.checkIn} â†’ ${o.checkOut} (${o.nights} nights)</div>
+                <div class="aoc-items">
+                    ${(o.items || []).map(i => {
+                        const item = typeof SHOP !== 'undefined' ? SHOP.getById(i.id) : null;
+                        return `<span class="aoc-item">${item ? item.name : i.id} Ã— ${i.qty}</span>`;
+                    }).join('')}
+                </div>
+                <div class="aoc-total">${fmt(o.total || 0)} total</div>
+            </div>`).join('');
+    }
+
+    /* â”€â”€ Boot: check session â”€â”€ */
+    async function boot() {
+        const user = await Auth.getUser();
+        if (user) {
+            showDashboard(user);
+        } else {
+            showAuth();
+        }
+        Auth.onAuthChange(u => {
+            if (u) showDashboard(u);
+            else showAuth();
+        });
+    }
+
+    boot();
+})();
+</script>
+</body>
+</html>
+

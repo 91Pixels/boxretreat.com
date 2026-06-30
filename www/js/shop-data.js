@@ -1,0 +1,185 @@
+/**
+ * shop-data.js — Equipment rental catalog
+ */
+const SHOP = {
+    categories: [
+        { id: 'all',     label: 'All Equipment' },
+        { id: 'surf',    label: 'Surfing' },
+        { id: 'snorkel', label: 'Snorkeling' },
+        { id: 'beach',   label: 'Beach' },
+        { id: 'water',   label: 'Water Sports' },
+    ],
+
+    items: [
+        /* ── Surfing ── */
+        {
+            id: 'shortboard',
+            category: 'surf',
+            name: 'Shortboard',
+            tagline: 'Performance board for intermediate–advanced surfers',
+            desc: '6\'2" thruster setup. Great for punchy beach breaks at Luquillo.',
+            price: 35,
+            image: 'https://images.unsplash.com/photo-1531722569936-825d4eaf10dc?w=600&h=400&fit=crop',
+            maxQty: 3,
+            badge: null,
+        },
+        {
+            id: 'longboard',
+            category: 'surf',
+            name: 'Longboard',
+            tagline: 'Stable & forgiving — perfect for beginners',
+            desc: '9\'0" noserider. Effortless glide for first-timers and log riders.',
+            price: 45,
+            image: 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?w=600&h=400&fit=crop',
+            maxQty: 2,
+            badge: 'Popular',
+        },
+        {
+            id: 'bodyboard',
+            category: 'surf',
+            name: 'Bodyboard',
+            tagline: 'Fun for all ages in shore break',
+            desc: 'High-density core, leash included. Great for kids and adults.',
+            price: 15,
+            image: 'https://images.unsplash.com/photo-1560090995-01632a28895b?w=600&h=400&fit=crop',
+            maxQty: 4,
+            badge: null,
+        },
+        {
+            id: 'sup',
+            category: 'surf',
+            name: 'Stand-Up Paddleboard',
+            tagline: 'Explore the coastline from the water',
+            desc: '11\'0" all-around inflatable SUP. Paddle included. Easy for beginners.',
+            price: 65,
+            image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop',
+            maxQty: 2,
+            badge: null,
+        },
+        {
+            id: 'wetsuit',
+            category: 'surf',
+            name: 'Shorty Wetsuit',
+            tagline: '3/2mm — sun & rash protection',
+            desc: 'Sizes S / M / L / XL. Specify your size in the notes.',
+            price: 20,
+            image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop',
+            maxQty: 4,
+            badge: null,
+        },
+
+        /* ── Snorkeling ── */
+        {
+            id: 'snorkel-set',
+            category: 'snorkel',
+            name: 'Snorkel Set',
+            tagline: 'Mask + fins + snorkel',
+            desc: 'Anti-fog tempered lens, adjustable strap. Explore the reef up close.',
+            price: 25,
+            image: 'https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=600&h=400&fit=crop',
+            maxQty: 4,
+            badge: 'Popular',
+        },
+        {
+            id: 'underwater-cam',
+            category: 'snorkel',
+            name: 'Underwater Camera',
+            tagline: 'Capture your reef adventures',
+            desc: 'Waterproof to 40m. 4K video, 20MP photos. Wrist lanyard included.',
+            price: 40,
+            image: 'https://images.unsplash.com/photo-1590418606746-018840f9eff8?w=600&h=400&fit=crop',
+            maxQty: 2,
+            badge: null,
+        },
+        {
+            id: 'snorkel-vest',
+            category: 'snorkel',
+            name: 'Snorkel Vest',
+            tagline: 'Safety float vest for non-swimmers',
+            desc: 'Adjustable inflatable vest. Fits adults S–XL.',
+            price: 10,
+            image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop',
+            maxQty: 4,
+            badge: null,
+        },
+
+        /* ── Beach ── */
+        {
+            id: 'beach-chair',
+            category: 'beach',
+            name: 'Beach Chair',
+            tagline: 'Reclining, lightweight, with cup holder',
+            desc: 'Aluminum frame with carrying strap. 5-position recline.',
+            price: 10,
+            image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=400&fit=crop',
+            maxQty: 6,
+            badge: null,
+        },
+        {
+            id: 'umbrella',
+            category: 'beach',
+            name: 'Beach Umbrella',
+            tagline: '7ft UPF 50+ shade',
+            desc: 'Sand anchor included. Tilts for optimal sun block.',
+            price: 12,
+            image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&h=400&fit=crop',
+            maxQty: 4,
+            badge: null,
+        },
+        {
+            id: 'cooler',
+            category: 'beach',
+            name: 'Cooler (48 qt)',
+            tagline: 'Keeps ice 3+ days',
+            desc: 'Hard-sided cooler with bottle opener and drain plug.',
+            price: 15,
+            image: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?w=600&h=400&fit=crop',
+            maxQty: 2,
+            badge: null,
+        },
+        {
+            id: 'beach-tent',
+            category: 'beach',
+            name: 'Pop-Up Beach Tent',
+            tagline: 'Sets up in 60 seconds',
+            desc: 'UPF 50+ shelter for 2–3 people. Stakes and carry bag included.',
+            price: 30,
+            image: 'https://images.unsplash.com/photo-1445307806294-bff7f67ff225?w=600&h=400&fit=crop',
+            maxQty: 2,
+            badge: null,
+        },
+
+        /* ── Water Sports ── */
+        {
+            id: 'kayak-single',
+            category: 'water',
+            name: 'Kayak — Single',
+            tagline: 'Solo exploration of coves & bays',
+            desc: 'Sit-on-top kayak. Life vest + paddle included.',
+            price: 65,
+            image: 'https://images.unsplash.com/photo-1472745433479-4556f22e32c2?w=600&h=400&fit=crop',
+            maxQty: 2,
+            badge: null,
+        },
+        {
+            id: 'kayak-double',
+            category: 'water',
+            name: 'Kayak — Double',
+            tagline: 'Perfect for couples or parent + child',
+            desc: 'Two-seat sit-on-top. Two paddles + two life vests included.',
+            price: 85,
+            image: 'https://images.unsplash.com/photo-1526080652727-5b77f74eacd2?w=600&h=400&fit=crop',
+            maxQty: 1,
+            badge: 'Limited',
+        },
+    ],
+
+    getByCategory(cat) {
+        if (cat === 'all') return this.items;
+        return this.items.filter(i => i.category === cat);
+    },
+
+    getById(id) {
+        return this.items.find(i => i.id === id);
+    },
+};

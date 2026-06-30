@@ -1,0 +1,482 @@
+/* ═══════════════════════════════════════════════════════════════
+   admin-reports.css — Financial Reports & Cost Management UI
+   BoxRetreat · Luquillo, Puerto Rico
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Period Filter Bar ── */
+.report-filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+.report-filter-bar .filter-label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #717171;
+    flex-shrink: 0;
+}
+.period-btn {
+    border: 1.5px solid #e5e7eb;
+    background: #fff;
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #555;
+    font-family: var(--font-body);
+    transition: all .15s;
+}
+.period-btn:hover  { border-color: #000000; color: #000000; }
+.period-btn.active { background: #0A0A0A; border-color: #0A0A0A; color: #fff; }
+.custom-range {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.custom-range input[type="date"] {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color .15s;
+}
+.custom-range input[type="date"]:focus { border-color: #000000; }
+.btn-apply-range {
+    background: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: background .15s;
+}
+.btn-apply-range:hover { background: #0099b8; }
+
+/* ── Summary KPI row ── */
+.fin-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+}
+.fin-kpi-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px 18px;
+    position: relative;
+    overflow: hidden;
+}
+.fin-kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+}
+.fin-kpi-card.revenue::before  { background: #000000; }
+.fin-kpi-card.costs::before    { background: #f59e0b; }
+.fin-kpi-card.profit::before   { background: #16a34a; }
+.fin-kpi-card.profit.negative::before { background: #dc2626; }
+.fin-kpi-card.roi::before      { background: #8b5cf6; }
+.fin-kpi-card.leads::before    { background: #0A0A0A; }
+.fin-kpi-card.cpa::before      { background: #ef4444; }
+.fin-kpi-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: #717171;
+    margin-bottom: 6px;
+}
+.fin-kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: var(--font-heading);
+    color: #0A0A0A;
+    line-height: 1.1;
+}
+.fin-kpi-value.positive { color: #16a34a; }
+.fin-kpi-value.negative { color: #dc2626; }
+.fin-kpi-sub {
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+/* ── Two-panel grid ── */
+.fin-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 20px;
+}
+@media (max-width: 900px) { .fin-grid-2 { grid-template-columns: 1fr; } }
+
+/* ── Report Panel ── */
+.fin-panel {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+}
+.fin-panel h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #0A0A0A;
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f3f4f6;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.fin-panel h3 .fa { color: #000000; }
+
+/* ── P&L Table ── */
+.pnl-table { width: 100%; }
+.pnl-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+}
+.pnl-row:last-child { border-bottom: none; }
+.pnl-row .pnl-label { color: #555; }
+.pnl-row .pnl-value { font-weight: 600; color: #0A0A0A; }
+.pnl-row.indent .pnl-label { padding-left: 16px; font-size: 13px; color: #888; }
+.pnl-row.indent .pnl-value { font-size: 13px; color: #888; }
+.pnl-row.section-head .pnl-label { font-weight: 700; font-size: 13px; color: #0A0A0A; }
+.pnl-row.divider { border-top: 2px solid #e5e7eb; margin-top: 4px; padding-top: 12px; }
+.pnl-row.total-row .pnl-label { font-weight: 700; font-size: 15px; color: #0A0A0A; }
+.pnl-row.total-row .pnl-value { font-weight: 800; font-size: 18px; }
+.pnl-row.total-row .pnl-value.positive { color: #16a34a; }
+.pnl-row.total-row .pnl-value.negative { color: #dc2626; }
+.pnl-subtotal { border-top: 1px solid #e5e7eb !important; }
+
+/* ── Bar Chart ── */
+.fin-chart { display: flex; flex-direction: column; gap: 12px; }
+.fin-chart-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+}
+.fin-chart-label { width: 54px; text-align: right; color: #555; flex-shrink: 0; }
+.fin-chart-bars  { flex: 1; display: flex; flex-direction: column; gap: 3px; }
+.fin-chart-track {
+    background: #f3f4f6;
+    border-radius: 4px;
+    height: 14px;
+    overflow: hidden;
+}
+.fin-chart-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width .5s ease;
+    min-width: 2px;
+}
+.fill-revenue { background: #000000; }
+.fill-cost    { background: #f59e0b; }
+.fill-profit  { background: #16a34a; }
+.fill-profit.negative { background: #dc2626; }
+.fin-chart-vals {
+    width: 64px;
+    text-align: right;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+.fin-chart-val { font-size: 11px; font-weight: 700; }
+.fin-chart-legend {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+.fin-legend-dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
+.fin-legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: #555; }
+
+/* ── Source Breakdown ── */
+.source-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 13px;
+}
+.source-row:last-child { border-bottom: none; }
+.source-icon { font-size: 18px; width: 24px; text-align: center; }
+.source-name { flex: 1; color: #0A0A0A; font-weight: 600; }
+.source-stat { color: #555; min-width: 60px; text-align: right; }
+
+/* ── Leads Table ── */
+.leads-table-wrap { overflow-x: auto; }
+.leads-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    min-width: 700px;
+}
+.leads-table th {
+    text-align: left;
+    padding: 8px 10px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #717171;
+    border-bottom: 1px solid #e5e7eb;
+    white-space: nowrap;
+}
+.leads-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid #f3f4f6;
+    color: #0A0A0A;
+    vertical-align: middle;
+}
+.leads-table tr:last-child td { border-bottom: none; }
+.leads-table tr:hover td { background: #f9fafb; }
+.badge-type-rental  { background:#dbeafe; color:#1d4ed8; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:700; }
+.badge-type-product { background:#fef3c7; color:#92400e; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:700; }
+.profit-pos { color: #16a34a; font-weight: 700; }
+.profit-neg { color: #dc2626; font-weight: 700; }
+.leads-empty { text-align:center; padding:28px; color:#717171; font-size:14px; }
+
+/* ── Add Lead Form ── */
+.lead-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+@media (max-width: 640px) { .lead-form { grid-template-columns: 1fr; } }
+.lead-form-field { display: flex; flex-direction: column; gap: 5px; }
+.lead-form-field label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #717171;
+}
+.lead-form-field input,
+.lead-form-field select {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color .15s;
+}
+.lead-form-field input:focus,
+.lead-form-field select:focus { border-color: #000000; }
+.lead-form-full { grid-column: 1 / -1; }
+.btn-add-lead {
+    background: #0A0A0A;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-body);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background .15s;
+}
+.btn-add-lead:hover { background: #222; }
+.btn-delete-lead {
+    background: none; border: none; color: #dc2626; cursor: pointer;
+    padding: 4px 8px; border-radius: 4px; transition: background .12s;
+}
+.btn-delete-lead:hover { background: #fee2e2; }
+
+/* ── Costs CRUD panel ── */
+.cost-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    margin-bottom: 16px;
+    align-items: end;
+}
+.cost-form-field { display: flex; flex-direction: column; gap: 5px; }
+.cost-form-field label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: #717171;
+}
+.cost-form-field input,
+.cost-form-field select {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: var(--font-body);
+    outline: none;
+    transition: border-color .15s;
+    height: 38px;
+}
+.cost-form-field input:focus,
+.cost-form-field select:focus { border-color: #000000; }
+.btn-add-cost {
+    background: #000000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 9px 18px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-body);
+    height: 38px;
+    white-space: nowrap;
+    transition: background .15s;
+}
+.btn-add-cost:hover { background: #0099b8; }
+
+.costs-table { width:100%; border-collapse:collapse; font-size:13px; }
+.costs-table th { text-align:left; padding:7px 10px; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#717171; border-bottom:1px solid #e5e7eb; }
+.costs-table td { padding:8px 10px; border-bottom:1px solid #f3f4f6; vertical-align:middle; }
+.costs-table tr:last-child td { border-bottom:none; }
+.badge-cost-property { background:#dbeafe; color:#1d4ed8; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:700; }
+.badge-cost-product  { background:#fef3c7; color:#92400e; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:700; }
+.badge-cost-adspend  { background:#f3e8ff; color:#7c3aed; border-radius:20px; padding:2px 9px; font-size:11px; font-weight:700; }
+.btn-del-cost { background:none; border:none; color:#dc2626; cursor:pointer; padding:4px 8px; border-radius:4px; }
+.btn-del-cost:hover { background:#fee2e2; }
+
+/* ── Product CRUD ── */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    margin-bottom: 16px;
+}
+.product-card {
+    border: 1.5px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #fff;
+    transition: border-color .15s;
+}
+.product-card:hover { border-color: #000000; }
+.product-card-name { font-weight: 700; font-size: 14px; margin-bottom: 6px; }
+.product-card-cat  { font-size: 11px; color: #aaa; text-transform: uppercase; letter-spacing:.05em; margin-bottom:8px; }
+.product-card-prices {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+.pc-sell  { color: #16a34a; font-weight: 700; }
+.pc-cost  { color: #717171; }
+.pc-margin { font-size:11px; color:#000000; font-weight:700; background:#e0f7ff; border-radius:4px; padding:2px 7px; }
+.product-card-actions { display:flex; gap:6px; }
+.btn-edit-product { flex:1; background:#f3f4f6; border:none; border-radius:6px; padding:6px; font-size:12px; font-weight:700; cursor:pointer; color:#0A0A0A; }
+.btn-edit-product:hover { background:#e5e7eb; }
+.btn-del-product { background:#fee2e2; border:none; border-radius:6px; padding:6px 10px; font-size:12px; font-weight:700; cursor:pointer; color:#dc2626; }
+.btn-del-product:hover { background:#fecaca; }
+
+/* Product add form */
+.product-add-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 10px;
+    align-items: end;
+    margin-bottom: 16px;
+    padding: 14px;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1.5px dashed #e5e7eb;
+}
+@media (max-width:780px) { .product-add-form { grid-template-columns: 1fr 1fr; } }
+.paf-field { display:flex; flex-direction:column; gap:4px; }
+.paf-field label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:#717171; }
+.paf-field input, .paf-field select {
+    border:1.5px solid #e5e7eb; border-radius:8px; padding:7px 10px; font-size:13px; font-family:var(--font-body); outline:none;
+}
+.paf-field input:focus, .paf-field select:focus { border-color:#000000; }
+.btn-add-product {
+    background:#0A0A0A; color:#fff; border:none; border-radius:8px; padding:8px 16px; font-size:13px; font-weight:700; cursor:pointer; font-family:var(--font-body); height:36px;
+}
+.btn-add-product:hover { background:#222; }
+
+/* ── Op Cost daily setting ── */
+.opcost-card {
+    background: linear-gradient(135deg, #0A0A0A 0%, #1a1a2e 100%);
+    border-radius: 12px;
+    padding: 22px 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+.opcost-left h4 { font-size: 14px; font-weight: 700; margin:0 0 4px; }
+.opcost-left p  { font-size: 12px; color: #aaa; margin:0; }
+.opcost-input-wrap { display:flex; align-items:center; gap:10px; }
+.opcost-input-wrap span { font-size:20px; color:#aaa; }
+.opcost-input-wrap input {
+    border:2px solid rgba(255,255,255,.2); background:rgba(255,255,255,.1); border-radius:8px;
+    padding:8px 14px; font-size:20px; font-weight:700; color:#fff; width:100px; outline:none;
+    font-family: var(--font-body);
+}
+.opcost-input-wrap input:focus { border-color:#000000; }
+.btn-save-opcost {
+    background:#000000; color:#fff; border:none; border-radius:8px; padding:8px 18px; font-size:13px; font-weight:700; cursor:pointer;
+}
+.btn-save-opcost:hover { background:#0099b8; }
+
+/* ── Role Guard Login Screen ── */
+.admin-gate {
+    position: fixed; inset:0; background:#fff; z-index:9999;
+    display:flex; align-items:center; justify-content:center;
+}
+.admin-gate-box {
+    width:360px; padding:40px 36px; border:1px solid #e5e7eb; border-radius:16px;
+    text-align:center; box-shadow:0 4px 40px rgba(0,0,0,.08);
+}
+.admin-gate-logo { font-size:22px; font-weight:800; letter-spacing:-.5px; margin-bottom:6px; }
+.admin-gate-logo span { color:#000000; }
+.admin-gate-sub { font-size:13px; color:#717171; margin-bottom:28px; }
+.admin-gate-box input {
+    width:100%; border:1.5px solid #e5e7eb; border-radius:8px; padding:11px 14px; font-size:14px; font-family:var(--font-body); outline:none; margin-bottom:12px; box-sizing:border-box;
+}
+.admin-gate-box input:focus { border-color:#000000; }
+.btn-admin-login {
+    width:100%; background:#0A0A0A; color:#fff; border:none; border-radius:8px; padding:12px; font-size:14px; font-weight:700; cursor:pointer; font-family:var(--font-body);
+}
+.btn-admin-login:hover { background:#222; }
+.admin-gate-error { font-size:13px; color:#dc2626; margin-top:10px; display:none; }
+.admin-gate-error.visible { display:block; }
+
+/* ── Mobile ── */
+@media (max-width:640px) {
+    .fin-kpi-row { grid-template-columns: 1fr 1fr; }
+    .fin-kpi-value { font-size:18px; }
+    .leads-table-wrap { font-size:12px; }
+    .cost-form { grid-template-columns: 1fr 1fr; }
+    .report-filter-bar { gap:6px; }
+    .period-btn { padding:6px 12px; font-size:12px; }
+}

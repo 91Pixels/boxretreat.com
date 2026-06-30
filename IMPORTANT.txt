@@ -1,0 +1,4 @@
+upload files from a folder 'monolit' to web server or local server to test
+
+
+Important!     Contact form work   - work only on a local server or host.

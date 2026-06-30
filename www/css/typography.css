@@ -1,0 +1,455 @@
+/*
+ * typography.css — BoxRetreat Editorial & Technical Type System
+ *
+ * Sistema de dos ejes:
+ *   Headings → serif editorial de alto contraste (Mercury, Arno Pro, Meursault)
+ *   Body/UI  → sans-serif geométrica y limpia  (Neue Montreal, Whyte, Aeonik)
+ *
+ * Estrategia de carga (cascada de tres capas):
+ *   1. @font-face  → archivos locales/self-hosted (máxima fidelidad, sin latencia CDN)
+ *   2. Google Fonts → sustitutos abiertos estilísticamente próximos (siempre disponibles)
+ *   3. System stack → fallback sin dependencia de red
+ */
+
+/* ============================================================
+   CAPA 1 — @font-face (archivos locales en www/fonts/)
+   Coloca los archivos .woff2 / .woff en esa carpeta y
+   descomenta el bloque correspondiente.
+   ============================================================ */
+
+/*
+ * ── Heading serif: Mercury Text G3 (Hoefler & Co.)
+ *    Obtener en: https://www.typography.com/fonts/mercury-text
+ *    Rutas de ejemplo (añade los archivos a www/fonts/mercury/):
+ */
+@font-face {
+    font-family: 'Mercury Text G3';
+    src: url('../fonts/mercury/MercuryTextG3-Roman.woff2')  format('woff2'),
+         url('../fonts/mercury/MercuryTextG3-Roman.woff')   format('woff');
+    font-weight: 400;
+    font-style:  normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Mercury Text G3';
+    src: url('../fonts/mercury/MercuryTextG3-Italic.woff2') format('woff2'),
+         url('../fonts/mercury/MercuryTextG3-Italic.woff')  format('woff');
+    font-weight: 400;
+    font-style:  italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Mercury Text G3';
+    src: url('../fonts/mercury/MercuryTextG3-Bold.woff2')   format('woff2'),
+         url('../fonts/mercury/MercuryTextG3-Bold.woff')    format('woff');
+    font-weight: 700;
+    font-style:  normal;
+    font-display: swap;
+}
+
+/*
+ * ── Heading serif alternativa: Arno Pro (Adobe)
+ *    Obtener en: https://fonts.adobe.com/fonts/arno
+ *    (incluida en Adobe CC — exportar como woff2 desde FontSquirrel Webfont Generator)
+ */
+@font-face {
+    font-family: 'Arno Pro';
+    src: url('../fonts/arno/ArnoPro-Regular.woff2') format('woff2'),
+         url('../fonts/arno/ArnoPro-Regular.woff')  format('woff');
+    font-weight: 400;
+    font-style:  normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Arno Pro';
+    src: url('../fonts/arno/ArnoPro-Bold.woff2')    format('woff2'),
+         url('../fonts/arno/ArnoPro-Bold.woff')     format('woff');
+    font-weight: 700;
+    font-style:  normal;
+    font-display: swap;
+}
+
+/*
+ * ── Heading serif variable: Meursault VF
+ *    Obtener en: https://fonts.adobe.com/fonts/meursault  (Adobe CC)
+ *    Variable font — un solo archivo cubre todo el rango de pesos.
+ */
+@font-face {
+    font-family: 'Meursault VF';
+    src: url('../fonts/meursault/MeursaultVF.woff2') format('woff2 supports variations'),
+         url('../fonts/meursault/MeursaultVF.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style:  normal;
+    font-display: swap;
+}
+
+/*
+ * ── Body sans-serif: Neue Montreal (Pangram Pangram)
+ *    Obtener en: https://pangrampangram.com/products/neue-montreal
+ *    (versión de prueba gratuita disponible en el sitio)
+ */
+@font-face {
+    font-family: 'Neue Montreal';
+    src: url('../fonts/neue-montreal/NeueMontreal-Regular.woff2') format('woff2'),
+         url('../fonts/neue-montreal/NeueMontreal-Regular.woff')  format('woff');
+    font-weight: 400;
+    font-style:  normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Neue Montreal';
+    src: url('../fonts/neue-montreal/NeueMontreal-Medium.woff2')  format('woff2'),
+         url('../fonts/neue-montreal/NeueMontreal-Medium.woff')   format('woff');
+    font-weight: 500;
+    font-style:  normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Neue Montreal';
+    src: url('../fonts/neue-montreal/NeueMontreal-Bold.woff2')    format('woff2'),
+         url('../fonts/neue-montreal/NeueMontreal-Bold.woff')     format('woff');
+    font-weight: 700;
+    font-style:  normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Neue Montreal';
+    src: url('../fonts/neue-montreal/NeueMontreal-Light.woff2')   format('woff2'),
+         url('../fonts/neue-montreal/NeueMontreal-Light.woff')    format('woff');
+    font-weight: 300;
+    font-style:  normal;
+    font-display: swap;
+}
+
+/*
+ * ── Body sans-serif alternativa: Whyte (ABC Dinamo)
+ *    Obtener en: https://abcdinamo.com/typefaces/whyte
+ */
+@font-face {
+    font-family: 'Whyte';
+    src: url('../fonts/whyte/Whyte-Regular.woff2') format('woff2'),
+         url('../fonts/whyte/Whyte-Regular.woff')  format('woff');
+    font-weight: 400;
+    font-style:  normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Whyte';
+    src: url('../fonts/whyte/Whyte-Medium.woff2')  format('woff2'),
+         url('../fonts/whyte/Whyte-Medium.woff')   format('woff');
+    font-weight: 500;
+    font-style:  normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Whyte';
+    src: url('../fonts/whyte/Whyte-Bold.woff2')    format('woff2'),
+         url('../fonts/whyte/Whyte-Bold.woff')     format('woff');
+    font-weight: 700;
+    font-style:  normal;
+    font-display: swap;
+}
+
+/*
+ * ── Body sans-serif alternativa: Aeonik (CoType Foundry)
+ *    Obtener en: https://cotypefoundry.com/aeonik
+ */
+@font-face {
+    font-family: 'Aeonik';
+    src: url('../fonts/aeonik/Aeonik-Regular.woff2') format('woff2'),
+         url('../fonts/aeonik/Aeonik-Regular.woff')  format('woff');
+    font-weight: 400;
+    font-style:  normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Aeonik';
+    src: url('../fonts/aeonik/Aeonik-Medium.woff2')  format('woff2'),
+         url('../fonts/aeonik/Aeonik-Medium.woff')   format('woff');
+    font-weight: 500;
+    font-style:  normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Aeonik';
+    src: url('../fonts/aeonik/Aeonik-Bold.woff2')    format('woff2'),
+         url('../fonts/aeonik/Aeonik-Bold.woff')     format('woff');
+    font-weight: 700;
+    font-style:  normal;
+    font-display: swap;
+}
+
+
+/*
+ * CAPA 2 — Google Fonts CDN
+ * ▸ Cormorant Garamond  → espíritu de Mercury Text / Arno Pro
+ * ▸ Lora                → alternativa serif editorial más neutra
+ * ▸ DM Sans             → espíritu geométrico de Neue Montreal / Whyte
+ * ▸ Plus Jakarta Sans   → alternativa sans-serif moderna y legible
+ *
+ * IMPORTANTE: En lugar de @import aquí (bloquea el parser CSS),
+ * los <link> de Google Fonts se cargan directamente en el <head>
+ * de cada página HTML para máxima performance.
+ * Ver: <link rel="stylesheet" href="https://fonts.googleapis.com/css2?...">
+ * en rental.html, shop.html, account.html, admin.html, success.html
+ */
+
+
+/* ============================================================
+   VARIABLES CSS — sistema tipográfico completo
+   ============================================================ */
+:root {
+    /* ── Familias ── */
+
+    /* Heading: Futura stack — geométrica editorial surf */
+    --font-heading:
+        'Futura',
+        'Century Gothic',
+        'Josefin Sans',
+        'Trebuchet MS',
+        sans-serif;
+
+    /* Body & UI: mismo stack Futura */
+    --font-body:
+        'Futura',
+        'Century Gothic',
+        'Josefin Sans',
+        'Trebuchet MS',
+        sans-serif;
+
+    /* ── Escalas de tamaño (tipo modular ratio 1.25) ── */
+    --text-xs:   0.75rem;   /*  12px */
+    --text-sm:   0.875rem;  /*  14px */
+    --text-base: 1rem;      /*  16px */
+    --text-md:   1.125rem;  /*  18px */
+    --text-lg:   1.25rem;   /*  20px */
+    --text-xl:   1.5rem;    /*  24px */
+    --text-2xl:  1.875rem;  /*  30px */
+    --text-3xl:  2.25rem;   /*  36px */
+    --text-4xl:  3rem;      /*  48px */
+    --text-5xl:  4rem;      /*  64px */
+
+    /* ── Pesos ── */
+    --fw-light:   300;
+    --fw-regular: 400;
+    --fw-medium:  500;
+    --fw-bold:    700;
+
+    /* ── Interlineado ── */
+    --lh-tight:   1.15;   /* títulos grandes */
+    --lh-snug:    1.3;    /* subtítulos */
+    --lh-normal:  1.5;    /* body compacto */
+    --lh-relaxed: 1.7;    /* cuerpo largo / artículos */
+
+    /* ── Tracking (letter-spacing) ── */
+    --ls-tighter: -0.04em;  /* h1 display */
+    --ls-tight:   -0.02em;  /* h2–h3 editorial */
+    --ls-normal:   0em;
+    --ls-wide:     0.06em;  /* labels, botones, menús */
+    --ls-wider:    0.12em;  /* metadata, tags en mayúsculas */
+}
+
+
+/* ============================================================
+   ESTILOS GLOBALES — aplicación a etiquetas HTML
+   ============================================================ */
+
+/* ── Base document ── */
+html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing:  antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+body,
+input,
+select,
+textarea {
+    font-family:  var(--font-body);
+    font-weight:  var(--fw-regular);
+    font-size:    var(--text-base);
+    line-height:  var(--lh-relaxed);
+    letter-spacing: var(--ls-normal);
+}
+
+/* ── Párrafos y texto corrido ── */
+p {
+    font-family:   var(--font-body);
+    font-weight:   var(--fw-regular);
+    line-height:   var(--lh-relaxed);
+    margin-bottom: 1em;
+}
+
+/* ── Titulares ── */
+h1, h2, h3, h4, h5, h6 {
+    font-family:    var(--font-heading);
+    font-weight:    var(--fw-bold);
+    line-height:    var(--lh-tight);
+    letter-spacing: var(--ls-tight);
+    margin-bottom:  0.5em;
+    /* Kerning óptico nativo cuando está disponible */
+    font-kerning:   auto;
+    font-variant-ligatures: common-ligatures;
+}
+
+h1 {
+    font-size:      var(--text-4xl);
+    letter-spacing: var(--ls-tighter);
+    line-height:    1.08;
+}
+
+h2 {
+    font-size:      var(--text-3xl);
+    letter-spacing: var(--ls-tight);
+    line-height:    var(--lh-tight);
+}
+
+h3 {
+    font-size:      var(--text-2xl);
+    letter-spacing: var(--ls-tight);
+    line-height:    var(--lh-snug);
+}
+
+h4 {
+    font-size:      var(--text-xl);
+    letter-spacing: -0.01em;
+    line-height:    var(--lh-snug);
+}
+
+h5 {
+    font-family:    var(--font-body);   /* h5–h6 → sans para jerarquía clara */
+    font-size:      var(--text-lg);
+    font-weight:    var(--fw-medium);
+    letter-spacing: var(--ls-normal);
+    line-height:    var(--lh-snug);
+}
+
+h6 {
+    font-family:    var(--font-body);
+    font-size:      var(--text-base);
+    font-weight:    var(--fw-medium);
+    letter-spacing: var(--ls-wide);
+    text-transform: uppercase;
+    line-height:    var(--lh-snug);
+}
+
+/* ── Elementos de interfaz ── */
+button,
+.btn,
+[class*="btn-"],
+[class*="-btn"],
+[class*="acct-submit"],
+[class*="acct-tab"],
+[class*="acct-dash-tab"],
+[class*="shop-tab"],
+[class*="bm-step-ind"] {
+    font-family:    var(--font-body);
+    font-weight:    var(--fw-medium);
+    letter-spacing: var(--ls-wide);
+}
+
+/* ── Navegación ── */
+nav,
+nav a,
+nav li,
+.flexnav li a,
+.flexnav li span {
+    font-family:    var(--font-body);
+    font-weight:    var(--fw-medium);
+    letter-spacing: var(--ls-wide);
+}
+
+/* ── Labels de formularios ── */
+label,
+legend {
+    font-family:    var(--font-body);
+    font-weight:    var(--fw-medium);
+    font-size:      var(--text-sm);
+    letter-spacing: var(--ls-wider);
+    text-transform: uppercase;
+}
+
+/* ── Inputs ── */
+input,
+textarea,
+select {
+    font-family: var(--font-body);
+    font-weight: var(--fw-regular);
+}
+
+/* ── Inline semántico ── */
+strong, b {
+    font-family: inherit;
+    font-weight: var(--fw-bold);
+}
+
+em, i {
+    font-style: italic;
+}
+
+/* ── Código y monospace ── */
+code, pre, kbd, samp {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+/* ── Metadata / etiquetas pequeñas (precio/noche, tags) ── */
+.bw-unit,
+.prop-dot,
+.prop-rating,
+.host-since,
+.review-author-date,
+.review-cat-label,
+.acct-note,
+.bw-note,
+.shop-hero-tag,
+.sds-nights,
+[class*="-meta"],
+[class*="-label"],
+[class*="-tag"],
+[class*="-note"],
+[class*="-date"],
+[class*="-badge"] {
+    font-family:    var(--font-body);
+    font-size:      var(--text-sm);
+    letter-spacing: var(--ls-wide);
+}
+
+/* ── Precio principal del widget de reserva ── */
+.bw-price,
+#bw-price-display,
+.big-rating {
+    font-family:    var(--font-heading);
+    font-weight:    var(--fw-bold);
+    font-size:      var(--text-2xl);
+    letter-spacing: var(--ls-tight);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ── Nombre del logo BoxRetreat ── */
+#logo span {
+    font-family:    var(--font-body) !important;
+    font-weight:    var(--fw-bold)   !important;
+    letter-spacing: -0.03em         !important;
+}
+
+/* ── Responsive: reducir tamaño tipográfico en móvil ── */
+@media (max-width: 767px) {
+    :root {
+        --text-4xl: 2.25rem;   /* h1 en móvil: 36px */
+        --text-3xl: 1.875rem;  /* h2 en móvil: 30px */
+        --text-2xl: 1.5rem;    /* h3 en móvil: 24px */
+    }
+
+    h1 { letter-spacing: -0.025em; }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --text-4xl: 1.875rem;  /* h1 en pantallas pequeñas: 30px */
+        --text-3xl: 1.5rem;
+    }
+}

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>BoxRetreat â€” Beach & Surf Equipment Rentals Â· Luquillo, PR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/ico" href="favicon.ico" />
+    <link href="style.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Typography system: premium serials (local @font-face via typography.css) +
+         open-source CDN fallbacks (Cormorant Garamond, DM Sans) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <link href="css/rental.css" rel="stylesheet" />
+</head>
+
+<body class="hidden">
+<main>
+<div class="cd-index cd-main-content">
+
+<div id="page-content" class="rental-page" data-bgcolor="#f4f5f7" data-textcolor="#000">
+
+    <div class="page-overlay from-bottom">
+        <div class="animate-box-bottom"></div>
+        <div class="animate-box-left"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="scroll-hide">
+        <div id="header-container">
+            <div id="logo">
+                <a href="rental.html">
+                    <span style="font-family:'Futura','Century Gothic','Josefin Sans',sans-serif;font-weight:700;font-size:18px;color:#0A0A0A;letter-spacing:-0.5px;">Box<span style="color:#000000;">Retreat</span></span>
+                </a>
+            </div>
+            <nav>
+                <ul data-breakpoint="1024" class="flexnav">
+                    <li><a href="rental.html">Property</a></li>
+                    <li><a class="active" href="shop.html">Shop</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="admin.html">Owner</a></li>
+                </ul>
+            </nav>
+            <!-- Cart button -->
+            <div style="display:flex;align-items:center;gap:16px;">
+                <button id="cart-btn" class="shop-cart-btn" aria-label="Open cart">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span id="cart-badge" style="display:none">0</span>
+                </button>
+                <div id="menu-burger"><span></span><span></span><span></span><span></span></div>
+            </div>
+        </div>
+    </header>
+
+    <div id="main">
+    <div id="main-content">
+
+    <!-- Shop Hero -->
+    <section class="shop-hero">
+        <div class="shop-hero-inner">
+            <span class="shop-hero-tag">Luquillo Beach Â· Puerto Rico</span>
+            <h1>Gear up for your<br/><span style="color:#000000;">perfect beach day</span></h1>
+            <p>Premium surf, snorkel &amp; beach equipment delivered to BoxRetreat â€” or available for pickup at checkout.</p>
+
+            <!-- Date picker strip -->
+            <div class="shop-date-strip">
+                <div class="sds-field">
+                    <label>Rental period</label>
+                    <input id="shop-checkin" type="text" placeholder="Select dates" readonly />
+                </div>
+                <div class="sds-nights" id="shop-nights-display">â€” nights</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category tabs -->
+    <div class="shop-tabs-wrap">
+        <div class="shop-tabs">
+            <button class="shop-tab active" data-cat="all">All Equipment</button>
+            <button class="shop-tab" data-cat="surf">ðŸ„ Surfing</button>
+            <button class="shop-tab" data-cat="snorkel">ðŸ¤¿ Snorkeling</button>
+            <button class="shop-tab" data-cat="beach">ðŸ– Beach</button>
+            <button class="shop-tab" data-cat="water">ðŸš£ Water Sports</button>
+        </div>
+    </div>
+
+    <!-- Product grid -->
+    <section class="shop-section">
+        <div class="rental-wrap">
+            <div id="shop-grid" class="shop-grid"></div>
+        </div>
+    </section>
+
+    <!-- Info strip -->
+    <section class="shop-info-strip">
+        <div class="rental-wrap">
+            <div class="sis-grid">
+                <div class="sis-item">
+                    <i class="fa fa-truck"></i>
+                    <strong>Free Delivery</strong>
+                    <span>To BoxRetreat guests. Others: pickup at property.</span>
+                </div>
+                <div class="sis-item">
+                    <i class="fa fa-refresh"></i>
+                    <strong>Free Cancellation</strong>
+                    <span>Cancel or modify up to 24 hours before pickup.</span>
+                </div>
+                <div class="sis-item">
+                    <i class="fa fa-shield"></i>
+                    <strong>Damage Waiver</strong>
+                    <span>Minor damage covered. Major damage billed at cost.</span>
+                </div>
+                <div class="sis-item">
+                    <i class="fa fa-star"></i>
+                    <strong>Cleaned & Inspected</strong>
+                    <span>Every item sanitized and checked before each rental.</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="rental-footer">
+        <div class="rental-wrap">
+            <div class="rf-inner">
+                <span style="font-family:'Futura','Century Gothic','Josefin Sans',sans-serif;font-weight:700;color:#0A0A0A;">Box<span style="color:#000000;">Retreat</span></span>
+                <span class="rf-copy">Â© 2026 BoxRetreat Â· Luquillo, Puerto Rico</span>
+                <div class="rf-links">
+                    <a href="rental.html">Property</a>
+                    <a href="shop.html">Shop</a>
+                    <a href="account.html">Account</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    </div><!-- /main-content -->
+    </div><!-- /main -->
+</div><!-- /page-content -->
+</div><!-- /cd-index -->
+</main>
+
+<!-- â”€â”€ Cart Sidebar â”€â”€ -->
+<div id="cart-overlay" class="cart-overlay"></div>
+<div id="cart-sidebar" class="cart-sidebar">
+    <div class="cart-header">
+        <h3>Your Cart</h3>
+        <button id="cart-close-btn" class="cart-close">Ã—</button>
+    </div>
+    <div id="cart-body" class="cart-body"></div>
+    <div id="cart-footer" class="cart-footer" style="display:none">
+        <div class="cart-summary">
+            <div class="cs-row"><span>Subtotal</span><span id="cart-sub">$0</span></div>
+            <div class="cs-row"><span>Service fee (14%)</span><span id="cart-svc">$0</span></div>
+            <div class="cs-row total"><span>Total</span><span id="cart-total">$0</span></div>
+            <p id="cart-nights-note" class="cart-note"></p>
+        </div>
+        <button id="cart-checkout-btn" class="shop-checkout-btn">Checkout â†’</button>
+    </div>
+</div>
+
+<!-- Toast -->
+<div id="shop-toast" class="shop-toast"></div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/plugins.js"></script>
+<script src="js/scripts.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="js/rental-data.js"></script>
+<script src="js/shop-data.js"></script>
+<script src="js/shop.js"></script>
+</body>
+</html>
+
